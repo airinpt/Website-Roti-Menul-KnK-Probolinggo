@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roti Menull Knk | Bakery</title>
+  <link rel="icon" type="image/png" href="../assets/logomenul.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="site-header" id="beranda">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <img src="../assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
+        <span class="brand-name">Roti Menull Knk</span>
+      </a>
+      <button class="nav-toggle" aria-label="Buka navigasi">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#review">Review</a></li>
+      </ul>
+    </nav>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-kicker">Made With Love! Welcome</p>
+        <h1>Roti Menull Knk</h1>
+        <p class="hero-subtitle">Roti hangat, lembut, dan manis dengan cita rasa rumahan yang selalu bikin rindu.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="order.html">Pesan Sekarang</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Freshly Baked Today</h3>
+        <ul>
+          <li>Roti Menul signature</li>
+          <li>Baby Menul lembut</li>
+          <li>Brownies legit</li>
+        </ul>
+        <div class="hero-badge">Operasional: Senin–Sabtu 09.00–22.00</div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <!-- Menu Categories -->
+    <section class="section menu-categories" id="menu">
+      <div class="section-header">
+        <h2>Menu Categories</h2>
+        <p>Pilihan roti dan kue favorit untuk segala momen.</p>
+      </div>
+      <div class="category-grid">
+        <button class="category-card category-button is-active" data-category="Roti Menul" type="button">
+          <div class="category-icon" aria-hidden="true"></div>
+          <h4>Roti Menul</h4>
+        </button>
+        <button class="category-card category-button" data-category="Baby Menul" type="button">
+          <div class="category-icon" aria-hidden="true"></div>
+          <h4>Baby Menul</h4>
+        </button>
+        <button class="category-card category-button" data-category="Roti Sobek" type="button">
+          <div class="category-icon" aria-hidden="true"></div>
+          <h4>Roti Sobek</h4>
+        </button>
+        <button class="category-card category-button" data-category="Brownies" type="button">
+          <div class="category-icon" aria-hidden="true"></div>
+          <h4>Brownies</h4>
+        </button>
+        <button class="category-card category-button" data-category="Lainnya" type="button">
+          <div class="category-icon" aria-hidden="true"></div>
+          <h4>Lainnya</h4>
+        </button>
+      </div>
+    </section>
+
+    <!-- Best Seller -->
+    <section class="section best-seller">
+      <div class="section-header">
+        <h2>Best Seller Products</h2>
+        <p>Favorit pelanggan dengan rasa yang konsisten lezat.</p>
+        <span class="category-label" id="categoryLabel">Kategori: Roti Menul</span>
+      </div>
+      <div class="carousel">
+        <button class="carousel-btn prev" aria-label="Sebelumnya">‹</button>
+        <div class="carousel-track" id="productTrack">
+          <article class="product-card">
+            <div class="product-image" aria-hidden="true"></div>
+            <h3>Roti Menul Original</h3>
+            <p>Lembut, manis, dan harum butter.</p>
+            <span class="price">Rp 5.000</span>
+          </article>
+        </div>
+        <button class="carousel-btn next" aria-label="Berikutnya">›</button>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section location" id="location">
+      <div class="section-header">
+        <h2>Location</h2>
+        <p>Temukan kami dan ambil pesananmu tepat waktu.</p>
+      </div>
+      <div class="location-grid">
+        <div class="map-embed">
+          <iframe
+            src="https://www.google.com/maps?q=Roti%20Menull%20KnK,%20Jl.%20Sunan%20Muria,%20Kebonsari%20Wetan,%20Kec.%20Kanigaran,%20Kota%20Probolinggo,%20Jawa%20Timur%2067214,%20Indonesia&output=embed"
+            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+          <p class="address">Jl. Sunan Muria, Kebonsari Wetan, Kec. Kanigaran, Kota Probolinggo, Jawa Timur 67214, Indonesia.</p>
+        </div>
+        <div class="contact-card" id="contact">
+          <h3>Contact</h3>
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:roti.menullknk@gmail.com">Gmail</a>
+          <div class="contact-note">Respon cepat di jam operasional.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Review -->
+    <section class="section testimonials" id="review">
+      <div class="section-header">
+        <h2>Testimonials</h2>
+        <p>Masukkan testimoni pelanggan dan tampilkan di kotak review.</p>
+      </div>
+      <div class="testimonials-grid">
+        <form class="testimonial-form" id="testimonialForm">
+          <label>
+            Nama
+            <input type="text" name="nama" placeholder="Nama pelanggan" required />
+          </label>
+          <label>
+            Testimoni
+            <textarea name="pesan" rows="4" placeholder="Tulis pengalamanmu..." required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Your Testimonials</button>
+        </form>
+        <div class="testimonial-box" id="testimonialBox">
+          <div class="testimonial-item">
+            <strong>Rina</strong>
+            <p>Rotinya lembut dan aromanya wangi. Pelayanan cepat.</p>
+          </div>
+          <div class="testimonial-item">
+            <strong>Bagus</strong>
+            <p>Brownies-nya favorit keluarga, tidak terlalu manis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" id="backToTop" aria-label="Kembali ke Beranda">↑</button>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h3>Roti Menull Knk</h3>
+        <p>Operasional: Senin–Sabtu 09.00–22.00</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#review">Review</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>WhatsApp: 0812-3456-7890</li>
+          <li>Instagram: @roti.menullknk</li>
+          <li>Gmail: roti.menullknk@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Roti Menull Knk. All rights reserved.</span>
+      <div class="socials">
+        <a href="https://wa.me/6281234567890" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.94 9.94 0 0 0-8.48 15.18L2 22l5.04-1.5A10 10 0 1 0 12 2Zm0 18.2a8.17 8.17 0 0 1-4.2-1.16l-.3-.18-2.97.88.9-2.9-.2-.3A8.19 8.19 0 1 1 12 20.2Zm4.7-4.68c-.26-.13-1.5-.74-1.73-.83s-.4-.13-.56.13-.65.83-.8 1-.3.2-.56.07a6.7 6.7 0 0 1-2-1.24 7.5 7.5 0 0 1-1.39-1.73c-.14-.26 0-.4.1-.53.12-.13.26-.3.4-.45.13-.16.17-.26.26-.43.1-.17.04-.32-.02-.45-.06-.13-.56-1.34-.77-1.84s-.4-.42-.56-.43h-.48c-.17 0-.45.07-.68.32s-.9.88-.9 2.13.93 2.46 1.06 2.63c.13.17 1.83 2.8 4.43 3.93.62.27 1.1.43 1.47.55.62.2 1.2.17 1.64.1.5-.08 1.5-.6 1.7-1.18.2-.6.2-1.1.14-1.18-.06-.08-.23-.13-.5-.26Z\"/></svg>
+          <span class="sr-only">WhatsApp</span>
+        </a>
+        <a href="https://instagram.com" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm10 2H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V7a2 2 0 0 0-2-2Zm-5 3.5A4.5 4.5 0 1 1 7.5 13 4.5 4.5 0 0 1 12 8.5Zm0 2A2.5 2.5 0 1 0 14.5 13 2.5 2.5 0 0 0 12 10.5ZM17.8 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z\"/></svg>
+          <span class="sr-only">Instagram</span>
+        </a>
+        <a href="mailto:roti.menullknk@gmail.com" aria-label="Gmail">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v.2l8 5 8-5V8H4Zm16 8V10.4l-8 5-8-5V16h16Z\"/></svg>
+          <span class="sr-only">Gmail</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
