@@ -1,21 +1,22 @@
 ﻿<!DOCTYPE html>
+<?php?>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roti Menull Knk | Bakery</title>
-  <link rel="icon" type="image/png" href="../assets/logomenul.png" />
+  <link rel="icon" type="image/png" href="./assets/logomenul.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
   <!-- Navbar -->
   <header class="site-header" id="beranda">
     <nav class="navbar">
-      <a class="brand" href="index.html">
-        <img src="../assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
+      <a class="brand" href="index.php">
+        <img src="./assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
         <span class="brand-name">Roti Menull Knk</span>
       </a>
       <button class="nav-toggle" aria-label="Buka navigasi">
@@ -36,7 +37,7 @@
         <h1>Roti Menull Knk</h1>
         <p class="hero-subtitle">Roti hangat, lembut, dan manis dengan cita rasa rumahan yang selalu bikin rindu.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="order.html">Pesan Sekarang</a>
+          <a class="btn btn-primary" href="order.php">Pesan Sekarang</a>
         </div>
       </div>
       <div class="hero-card">
@@ -206,6 +207,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.php"></script>
 </body>
 </html>

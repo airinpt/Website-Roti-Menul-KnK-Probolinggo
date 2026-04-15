@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<?php /* Converted to PHP; markup stays the same. */ ?>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -14,7 +15,7 @@
   <!-- Navbar -->
   <header class="site-header compact">
     <nav class="navbar">
-      <a class="brand" href="index.html">
+      <a class="brand" href="index.php">
         <img src="../assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
         <span class="brand-name">Roti Menull Knk</span>
       </a>
@@ -22,11 +23,11 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
-        <li><a href="index.html#beranda">Beranda</a></li>
-        <li><a href="index.html#menu">Menu</a></li>
-        <li><a href="index.html#location">Location</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="index.html#review">Review</a></li>
+        <li><a href="index.php#beranda">Beranda</a></li>
+        <li><a href="index.php#menu">Menu</a></li>
+        <li><a href="index.php#location">Location</a></li>
+        <li><a href="index.php#contact">Contact</a></li>
+        <li><a href="index.php#review">Review</a></li>
       </ul>
     </nav>
   </header>
@@ -98,11 +99,11 @@
       <div>
         <h4>Navigasi</h4>
         <ul>
-          <li><a href="index.html#beranda">Beranda</a></li>
-          <li><a href="index.html#menu">Menu</a></li>
-          <li><a href="index.html#location">Location</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-          <li><a href="index.html#review">Review</a></li>
+          <li><a href="index.php#beranda">Beranda</a></li>
+          <li><a href="index.php#menu">Menu</a></li>
+          <li><a href="index.php#location">Location</a></li>
+          <li><a href="index.php#contact">Contact</a></li>
+          <li><a href="index.php#review">Review</a></li>
         </ul>
       </div>
       <div>
@@ -133,6 +134,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.php"></script>
 </body>
 </html>

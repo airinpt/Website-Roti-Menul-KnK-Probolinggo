@@ -1,4 +1,8 @@
-﻿const navToggle = document.querySelector(".nav-toggle");
+<?php
+header("Content-Type: application/javascript; charset=UTF-8");
+?>
+
+const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
 
@@ -195,3 +199,4 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
