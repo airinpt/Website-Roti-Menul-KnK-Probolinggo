@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roti Menull Knk | Bakery</title>
+  <link rel="icon" type="image/png" href="./assets/logomenul.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" id="beranda">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <img src="./assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
+        <span class="brand-name">Roti Menull Knk</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#review">Review</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Buka navigasi">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-kicker">Made With Love! Welcome</p>
+        <h1>Roti Menull Knk</h1>
+        <p class="hero-subtitle">Roti hangat, lembut, dan manis dengan cita rasa rumahan yang selalu bikin rindu.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="src/order.html">Pesan Sekarang</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>🍞 Freshly Baked Today</h3>
+        <ul>
+          <li>✨ Roti Menull signature</li>
+          <li>🤍 Baby Menull lembut</li>
+          <li>🍫 Brownies legit</li>
+        </ul>
+        <div class="hero-badge">⏰ Senin–Sabtu &nbsp;09.00–22.00</div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+
+    <section class="section menu-categories" id="menu">
+      <div class="section-header">
+        <h2>Menu Categories</h2>
+        <p>Pilihan roti dan kue favorit untuk segala momen.</p>
+      </div>
+      <div class="menu-grid" id="allProductGrid"></div>
+    </section>
+
+    <section class="section location" id="location">
+      <div class="section-header">
+        <h2>Location</h2>
+        <p>Temukan kami dan ambil pesananmu tepat waktu.</p>
+      </div>
+      <div class="location-grid">
+        <div class="map-embed">
+          <iframe
+            src="https://www.google.com/maps?q=Roti%20Menull%20KnK,%20Jl.%20Sunan%20Muria,%20Kebonsari%20Wetan,%20Kec.%20Kanigaran,%20Kota%20Probolinggo,%20Jawa%20Timur%2067214,%20Indonesia&output=embed"
+            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+          <p class="address">📍 Jl. Sunan Muria, Kebonsari Wetan, Kec. Kanigaran, Kota Probolinggo, Jawa Timur 67214.</p>
+        </div>
+        <div class="contact-card" id="contact">
+          <h3>Contact</h3>
+          <a href="https://wa.me/6289523896740" target="_blank" rel="noopener" class="contact-link wa">
+            💬 WhatsApp
+          </a>
+          <a href="https://www.instagram.com/roti_menull_knk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="contact-link ig">
+            📸 Instagram
+          </a>
+          <a href="https://www.tiktok.com/@roti_menull_knk?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="contact-link tt">
+            🎵 TikTok
+          </a>
+          <div class="contact-note">⚡ Respon cepat di jam operasional.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" id="review">
+      <div class="section-header">
+        <h2>Testimonials</h2>
+        <p>Apa kata pelanggan kami? Bagikan pengalamanmu!</p>
+      </div>
+      <div class="testimonials-grid">
+        <form class="testimonial-form" id="testimonialForm" novalidate>
+          <label>
+            Nama
+            <input type="text" id="tNama" placeholder="Nama kamu" required />
+          </label>
+          <label>
+            Testimoni
+            <textarea id="tPesan" rows="4" placeholder="Ceritakan pengalamanmu..." required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Kirim Testimoni ✉️</button>
+        </form>
+        <div class="testimonial-box" id="testimonialBox">
+          <div class="testimonial-item">
+            <strong>⭐ Rina</strong>
+            <p>Rotinya lembut dan aromanya wangi. Pelayanan cepat, recommended banget!</p>
+          </div>
+          <div class="testimonial-item">
+            <strong>⭐ Bagus</strong>
+            <p>Brownies-nya favorit keluarga, tidak terlalu manis, teksturnya perfect.</p>
+          </div>
+          <div class="testimonial-item">
+            <strong>⭐ Sari</strong>
+            <p>Baby Menul cokelatnya enak banget, anak-anak suka semua. Pasti beli lagi!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">↑</button>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h3>🍞 Roti Menull Knk</h3>
+        <p>Roti hangat dengan cita rasa rumahan.</p>
+        <p>Senin–Sabtu &nbsp;09.00–22.00</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#review">Review</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>💬 0895-2389-6740</li>
+          <li>📸 @roti_menull_knk</li>
+          <li>🎵 @roti_menull_knk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Roti Menull Knk. All rights reserved.</span>
+      <div class="socials">
+        <a href="https://wa.me/6289523896740" aria-label="WhatsApp" class="social-icon" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2a9.94 9.94 0 0 0-8.48 15.18L2 22l5.04-1.5A10 10 0 1 0 12 2Zm0 18.2a8.17 8.17 0 0 1-4.2-1.16l-.3-.18-2.97.88.9-2.9-.2-.3A8.19 8.19 0 1 1 12 20.2Zm4.7-4.68c-.26-.13-1.5-.74-1.73-.83s-.4-.13-.56.13-.65.83-.8 1-.3.2-.56.07a6.7 6.7 0 0 1-2-1.24 7.5 7.5 0 0 1-1.39-1.73c-.14-.26 0-.4.1-.53.12-.13.26-.3.4-.45.13-.16.17-.26.26-.43.1-.17.04-.32-.02-.45-.06-.13-.56-1.34-.77-1.84s-.4-.42-.56-.43h-.48c-.17 0-.45.07-.68.32s-.9.88-.9 2.13.93 2.46 1.06 2.63c.13.17 1.83 2.8 4.43 3.93.62.27 1.1.43 1.47.55.62.2 1.2.17 1.64.1.5-.08 1.5-.6 1.7-1.18.2-.6.2-1.1.14-1.18-.06-.08-.23-.13-.5-.26Z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/roti_menull_knk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm10 2H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V7a2 2 0 0 0-2-2Zm-5 3.5A4.5 4.5 0 1 1 7.5 13 4.5 4.5 0 0 1 12 8.5Zm0 2A2.5 2.5 0 1 0 14.5 13 2.5 2.5 0 0 0 12 10.5ZM17.8 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@roti_menull_knk?is_from_webapp=1&sender_device=pc" aria-label="TikTok" class="social-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.PRODUCTS = {
+      "Roti Menull": [
+        { name: "Roti Menull Original",  image: "rotimenull.jpeg" },
+        { name: "Baby Menull",           image: "babymenull.jpeg" },
+        { name: "Roti Sobek Menull",     image: "rotisobek.jpeg" }
+      ],
+      "Bolu": [
+        { name: "Menull Nyoklaaat",      image: "rotimenull_nyoklat.jpeg" },
+        { name: "Brownies Kukus",        image: "brownies_kukus.jpeg" },
+        { name: "Brownies Cepuk",        image: "brownies_cepuk.jpeg" }
+      ],
+      "Baby Menull": [
+        { name: "Bolu Menull",           image: "bolumenull_bolu.jpeg" },
+        { name: "Bolu Menull Mini",      image: "bolumenull_bolumini.jpeg" },
+        { name: "Bolu Potong",           image: "bolumenull_bolupotong.jpeg" }
+      ],
+      "Roti Sobek": [
+        { name: "Brownies Mini",         image: "brownies_mini.jpeg" },
+        { name: "Roti Menull Kering",    image: "rotimenull_kering.jpeg" }
+      ],
+      "Brownies": [
+        { name: "Brownies Slice",        image: "brownies_slice.jpeg" },
+        { name: "Mini Menull",           image: "rotimenull_minimenull.jpeg" }
+      ]
+    };
+
+    function renderAllProducts() {
+      const grid = document.getElementById('allProductGrid');
+      if (!grid) return;
+      const all = Object.values(window.PRODUCTS).flat();
+      grid.innerHTML = all.map(p => `
+        <div class="menu-card">
+          <div class="menu-photo">
+            <img src="./assets/${p.image}" alt="${p.name}" loading="lazy"
+                 onerror="this.onerror=null;this.src='https://placehold.co/300x300/f0e1d3/6b4632?text=No+Image';" />
+          </div>
+          <div class="menu-meta">
+            <div class="menu-name">${p.name}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks  = document.querySelector('.nav-links');
+    const navItems  = document.querySelectorAll('.nav-links a');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navItems.forEach(a => {
+        a.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          const href = a.getAttribute('href');
+          if (href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+              setTimeout(() => updateActiveNav(), 100);
+            }
+          }
+        });
+      });
+    }
+
+    function updateActiveNav() {
+      let currentSection = null;
+      let closestToTop = Infinity;
+
+      navItems.forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) {
+            const rect = target.getBoundingClientRect();
+            const distanceToTop = Math.abs(rect.top);
+            
+            if (rect.top <= window.innerHeight / 2 && distanceToTop < closestToTop) {
+              closestToTop = distanceToTop;
+              currentSection = href.substring(1);
+            }
+          }
+        }
+      });
+
+      navItems.forEach(a => {
+        const href = a.getAttribute('href');
+        if (href === `#${currentSection}`) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('load', updateActiveNav);
+
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 300));
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    function loadTestimonials() {
+      const saved = localStorage.getItem('testimonials');
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        const box = document.getElementById('testimonialBox');
+        data.forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'testimonial-item';
+          el.innerHTML = `<strong>⭐ ${esc(item.nama)}</strong><p>${esc(item.pesan)}</p>`;
+          box.appendChild(el);
+        });
+      } catch (e) {
+        console.error('Error loading testimonials:', e);
+      }
+    }
+
+    function saveTestimonial(nama, pesan) {
+      try {
+        const saved = localStorage.getItem('testimonials') || '[]';
+        const data = JSON.parse(saved);
+        data.unshift({ nama, pesan, date: new Date().toISOString() });
+        localStorage.setItem('testimonials', JSON.stringify(data.slice(0, 50)));
+      } catch (e) {
+        console.error('Error saving testimonial:', e);
+      }
+    }
+
+    document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nama  = document.getElementById('tNama').value.trim();
+      const pesan = document.getElementById('tPesan').value.trim();
+      if (!nama || !pesan) return;
+
+      saveTestimonial(nama, pesan);
+
+      const box  = document.getElementById('testimonialBox');
+      const item = document.createElement('div');
+      item.className = 'testimonial-item testimonial-new';
+      item.innerHTML = `<strong>⭐ ${esc(nama)}</strong><p>${esc(pesan)}</p>`;
+
+      box.prepend(item);
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => item.classList.add('testimonial-visible'))
+      );
+
+      this.reset();
+    });
+
+    function esc(s) {
+      return s.replace(/[&<>"']/g,
+        m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
+      );
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        renderAllProducts();
+        loadTestimonials();
+      });
+    } else {
+      renderAllProducts();
+      loadTestimonials();
+    }
+  </script>
+</body>
+</html>

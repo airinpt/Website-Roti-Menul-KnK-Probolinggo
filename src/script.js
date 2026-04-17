@@ -1,7 +1,3 @@
-<?php
-header("Content-Type: application/javascript; charset=UTF-8");
-?>
-
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
@@ -89,11 +85,6 @@ const productData = {
     { name: "Brownies Choco", desc: "Tekstur fudgy dengan cokelat pekat.", price: "Rp 20.000" },
     { name: "Brownies Keju", desc: "Lapisan keju lembut di atasnya.", price: "Rp 22.000" },
     { name: "Brownies Kacang", desc: "Renya kacang di setiap potong.", price: "Rp 21.000" }
-  ],
-  "Lainnya": [
-    { name: "Donat Gula", desc: "Manis ringan untuk teman kopi.", price: "Rp 4.000" },
-    { name: "Kue Kering", desc: "Renyah, cocok untuk hampers.", price: "Rp 15.000" },
-    { name: "Bolu Kukus", desc: "Lembut dengan aroma vanila.", price: "Rp 10.000" }
   ]
 };
 
@@ -199,4 +190,3 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
-
