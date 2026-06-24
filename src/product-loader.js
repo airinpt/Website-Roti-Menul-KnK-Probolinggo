@@ -5,7 +5,7 @@ class ProductLoader {
   constructor(options = {}) {
     this.gridId = options.gridId || 'categoryProductGrid';
     this.products = [];
-    this.apiUrl = options.apiUrl || '../api/data.php';
+    this.apiUrl = options.apiUrl || '../api/data.html';
   }
 
   async loadProducts() {

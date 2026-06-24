@@ -1,6 +1,6 @@
 /**
  * Order Summary Renderer
- * Renders the checkout.php and customer-info.php pages using the
+ * Renders the checkout.html and customer-info.html pages using the
  * configured cart produced by the order modal (enhanced-cart.js).
  *
  * Replaces the older cart-system.js rendering on these two pages, which
@@ -12,9 +12,9 @@ const ORDER_NOTES_KEY = 'menull-order-notes-v1';
 
 const ORDER_SUMMARY_CONTEXT = window.MENULL_PAGE_CONTEXT || {};
 const ORDER_SUMMARY_ROUTES = {
-  checkout: ORDER_SUMMARY_CONTEXT.checkoutUrl || './checkout.php',
-  customerInfo: ORDER_SUMMARY_CONTEXT.customerInfoUrl || './customer-info.php',
-  sessionEndpoint: ORDER_SUMMARY_CONTEXT.sessionEndpoint || './src/cart-session.php',
+  checkout: ORDER_SUMMARY_CONTEXT.checkoutUrl || './checkout.html',
+  customerInfo: ORDER_SUMMARY_CONTEXT.customerInfoUrl || './customer-info.html',
+  sessionEndpoint: ORDER_SUMMARY_CONTEXT.sessionEndpoint || './src/cart-session.html',
 };
 
 const ORDER_SUMMARY_WA_NUMBER = ORDER_SUMMARY_CONTEXT.waNumber || '6281292401513';

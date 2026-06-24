@@ -7,9 +7,9 @@
 declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../src/Database.php';
-require_once __DIR__ . '/../src/Product.php';
+require_once __DIR__ . '/../config/database.html';
+require_once __DIR__ . '/../src/database.html';
+require_once __DIR__ . '/../src/product.html';
 
 // Check if product ID is provided
 $productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;

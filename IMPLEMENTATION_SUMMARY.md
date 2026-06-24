@@ -3,7 +3,7 @@
 ## ✅ Completed Components
 
 ### 1. **Database Layer** ✓
-- **Location**: `config/database.php`
+- **Location**: `config/database.html`
 - Database schema with 11 normalized tables
 - Proper foreign key relationships
 - Support for all brands (MieeNull, Roti Menull, Teras Menull)
@@ -22,19 +22,19 @@
 - `order_items` - Order line items
 
 ### 2. **Setup & Seeding** ✓
-- **Setup Script**: `config/setup-db.php`
+- **Setup Script**: `config/setup-db.html`
   - Run once to create all database tables
-  - Command: `php config/setup-db.php`
+  - Command: `php config/setup-db.html`
 
-- **Seed Script**: `config/seed-data.php`
+- **Seed Script**: `config/seed-data.html`
   - Populates database with sample data
   - Creates 3 brands, 6 categories, 7 products
   - Creates sample extras and additional items
-  - Command: `php config/seed-data.php`
+  - Command: `php config/seed-data.html`
 
 ### 3. **API Layer** ✓
 
-#### Data API (`api/data.php`)
+#### Data API (`api/data.html`)
 - Get all brands
 - Get categories with filters
 - Get products with all configurations
@@ -43,7 +43,7 @@
 - Get additional items
 - **Status**: Ready for production
 
-#### Admin API (`api/admin.php`)
+#### Admin API (`api/admin.html`)
 - Create/Update/Delete categories
 - Create/Update/Delete products
 - Create/Update/Delete extras
@@ -98,7 +98,7 @@
 - Light theme matching existing design
 
 ### 5. **Admin Panel** ✓
-- **Location**: `admin/index.php`
+- **Location**: `admin/index.html`
 - **Functionality**: `admin/admin-panel.js`
 - Dashboard with statistics
 - Category management interface
@@ -125,22 +125,22 @@
 cd c:\laragon\www\webmenullknk
 
 # Create tables
-php config/setup-db.php
+php config/setup-db.html
 
 # Seed sample data
-php config/seed-data.php
+php config/seed-data.html
 ```
 
 ### Step 2: Update Category Pages
 
-Update all category pages (mie-minull/index.php, roti-menull/index.php, teras-menull/index.php):
+Update all category pages (mie-minull/index.html, roti-menull/index.html, teras-menull/index.html):
 
 ```html
 <script>
   window.MENULL_PAGE_CONTEXT = {
-    checkoutUrl: '../checkout.php',
-    customerInfoUrl: '../customer-info.php',
-    sessionEndpoint: '../src/cart-session.php',
+    checkoutUrl: '../checkout.html',
+    customerInfoUrl: '../customer-info.html',
+    sessionEndpoint: '../src/cart-session.html',
     waNumber: '6281292401513'
   };
 </script>
@@ -160,7 +160,7 @@ Update all category pages (mie-minull/index.php, roti-menull/index.php, teras-me
 
 ### Step 3: Update Checkout Page
 
-Modify checkout.php to display configurations:
+Modify checkout.html to display configurations:
 
 ```javascript
 // Display configuration details in cart items
@@ -187,8 +187,8 @@ function formatConfigDisplay(item) {
 
 1. **Setup Database**:
    ```bash
-   php config/setup-db.php
-   php config/seed-data.php
+   php config/setup-db.html
+   php config/seed-data.html
    ```
 
 2. **Test Product Loading**:
@@ -215,15 +215,15 @@ function formatConfigDisplay(item) {
 
 ### New Files Created (15 files)
 ```
-config/database.php                 - Database connection
-config/setup-db.php                 - Database schema setup
-config/seed-data.php                - Sample data seeding
-api/data.php                        - Data retrieval API
-api/admin.php                       - Admin management API
+config/database.html                 - Database connection
+config/setup-db.html                 - Database schema setup
+config/seed-data.html                - Sample data seeding
+api/data.html                        - Data retrieval API
+api/admin.html                       - Admin management API
 src/order-modal.js                  - Modal component
 src/enhanced-cart.js                - Enhanced cart system
 src/product-loader.js               - Product loader
-admin/index.php                     - Admin panel UI
+admin/index.html                     - Admin panel UI
 admin/admin-panel.js                - Admin panel logic
 SETUP_GUIDE.md                      - Setup documentation
 ```
@@ -254,11 +254,11 @@ css/style.css                       - Added 400+ lines of modal styles
 │          │ order-modal.js     │ product-loader.js│ cart   │
 │  ┌───────▼──────────┐        │                   │        │
 │  │ Data API         │        │ Admin Panel       │        │
-│  │ (api/data.php)   │        │ (admin/           │        │
-│  │                  │        │  index.php)       │        │
+│  │ (api/data.html)   │        │ (admin/           │        │
+│  │                  │        │  index.html)       │        │
 │  │ BACKEND (PHP)    │◄───────┼──────────────┐    │        │
 │  │                  │        │ Admin API    │    │        │
-│  └───────┬──────────┘        │ (api/admin.php)  │        │
+│  └───────┬──────────┘        │ (api/admin.html)  │        │
 │          │                   └─────────────┘    │        │
 │  ┌───────▼──────────────────────────────────┐   │        │
 │  │      MySQL Database                      │   │        │
@@ -414,7 +414,7 @@ See `SETUP_GUIDE.md` for:
 
 ## 🎓 Learning Resources
 
-- Review `api/data.php` for data retrieval patterns
+- Review `api/data.html` for data retrieval patterns
 - Study `src/order-modal.js` for component architecture
 - Check `src/enhanced-cart.js` for state management
 - Explore `admin/admin-panel.js` for CRUD operations

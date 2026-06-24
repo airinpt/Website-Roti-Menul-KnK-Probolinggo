@@ -6,8 +6,8 @@
 
 ```bash
 cd c:\laragon\www\webmenullknk
-php config/setup-db.php
-php config/seed-data.php
+php config/setup-db.html
+php config/seed-data.html
 ```
 
 **Expected Output**:
@@ -21,10 +21,10 @@ php config/seed-data.php
 #### Test Data API
 ```bash
 # Get all brands
-curl "http://localhost/webmenullknk/api/data.php?action=brands"
+curl "http://localhost/webmenullknk/api/data.html?action=brands"
 
 # Get all products
-curl "http://localhost/webmenullknk/api/data.php?action=products"
+curl "http://localhost/webmenullknk/api/data.html?action=products"
 ```
 
 #### Access Admin Panel
@@ -37,7 +37,7 @@ You should see dashboard with statistics.
 
 ### 3. Integrate into Category Pages (2 minutes)
 
-Add this to **mie-minull/index.php** inside `<body>` tag:
+Add this to **mie-minull/index.html** inside `<body>` tag:
 
 ```html
 <!-- Add before closing </body> tag -->
@@ -53,7 +53,7 @@ Add this to **mie-minull/index.php** inside `<body>` tag:
 </script>
 ```
 
-Repeat for **roti-menull/index.php** and **teras-menull/index.php**.
+Repeat for **roti-menull/index.html** and **teras-menull/index.html**.
 
 ## ✅ Verify It Works
 
@@ -79,13 +79,13 @@ Repeat for **roti-menull/index.php** and **teras-menull/index.php**.
 ```
 webmenullknk/
 ├── config/
-│   ├── database.php              ← Database config
-│   ├── setup-db.php              ← Run once to create tables
-│   └── seed-data.php             ← Run once to add sample data
+│   ├── database.html              ← Database config
+│   ├── setup-db.html              ← Run once to create tables
+│   └── seed-data.html             ← Run once to add sample data
 │
 ├── api/
-│   ├── data.php                  ← Data retrieval API
-│   └── admin.php                 ← Admin management API
+│   ├── data.html                  ← Data retrieval API
+│   └── admin.html                 ← Admin management API
 │
 ├── src/
 │   ├── order-modal.js            ← Modal component
@@ -93,12 +93,12 @@ webmenullknk/
 │   └── product-loader.js         ← Product loader
 │
 ├── admin/
-│   ├── index.php                 ← Admin panel UI
+│   ├── index.html                 ← Admin panel UI
 │   └── admin-panel.js            ← Admin logic
 │
-├── mie-minull/index.php          ← Update these
-├── roti-menull/index.php         ├── Add modal scripts
-└── teras-menull/index.php        └── and product loader
+├── mie-minull/index.html          ← Update these
+├── roti-menull/index.html         ├── Add modal scripts
+└── teras-menull/index.html        └── and product loader
 
 └── SETUP_GUIDE.md                ← Detailed documentation
 └── IMPLEMENTATION_SUMMARY.md     ← Technical overview
@@ -107,7 +107,7 @@ webmenullknk/
 ## 🔧 Customization
 
 ### Change Brand Names
-Edit `config/seed-data.php`:
+Edit `config/seed-data.html`:
 ```php
 $brands = [
     ['id' => 1, 'name' => 'YourBrandName1'],
@@ -118,7 +118,7 @@ $brands = [
 
 Then reseed:
 ```bash
-php config/seed-data.php
+php config/seed-data.html
 ```
 
 ### Change Modal Colors
@@ -141,7 +141,7 @@ const options = ['Your Option 1', 'Your Option 2'];
 Check browser console (F12):
 - Do you see any red errors?
 - Is the API accessible? Visit:
-  `http://localhost/webmenullknk/api/data.php?action=products`
+  `http://localhost/webmenullknk/api/data.html?action=products`
 
 ### "Modal not appearing"
 - Verify `order-modal.js` is loaded (check HTML source)
@@ -154,9 +154,9 @@ Check browser console (F12):
 - Should see `menull-cart-enhanced-v1` key
 
 ### "Database errors"
-- Check `config/database.php` database credentials
+- Check `config/database.html` database credentials
 - Verify MySQL is running
-- Run setup again: `php config/setup-db.php`
+- Run setup again: `php config/setup-db.html`
 
 ## 📊 Sample Data Included
 
@@ -218,11 +218,11 @@ mysql -u root menull_db < backup.sql
 
 | Task | Command |
 |------|---------|
-| Setup database | `php config/setup-db.php` |
-| Add sample data | `php config/seed-data.php` |
+| Setup database | `php config/setup-db.html` |
+| Add sample data | `php config/seed-data.html` |
 | Access admin | `http://localhost/webmenullknk/admin/` |
-| View all products API | `http://localhost/webmenullknk/api/data.php?action=products` |
-| Get one product | `http://localhost/webmenullknk/api/data.php?action=product&product_id=1` |
+| View all products API | `http://localhost/webmenullknk/api/data.html?action=products` |
+| Get one product | `http://localhost/webmenullknk/api/data.html?action=product&product_id=1` |
 
 ## 🚀 You're Ready!
 

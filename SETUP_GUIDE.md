@@ -19,7 +19,7 @@ This system implements a modern order configuration modal for the Menull website
 Run the setup script to create all tables:
 
 ```bash
-php config/setup-db.php
+php config/setup-db.html
 ```
 
 This will create:
@@ -40,7 +40,7 @@ This will create:
 Populate the database with sample data:
 
 ```bash
-php config/seed-data.php
+php config/seed-data.html
 ```
 
 This creates:
@@ -51,101 +51,101 @@ This creates:
 
 ## 🔧 API Endpoints
 
-### Data Retrieval API (`api/data.php`)
+### Data Retrieval API (`api/data.html`)
 
 All endpoints are GET requests and return JSON responses.
 
 #### Get All Brands
 ```
-GET /api/data.php?action=brands
+GET /api/data.html?action=brands
 ```
 
 #### Get Categories
 ```
-GET /api/data.php?action=categories&brand_id=1
+GET /api/data.html?action=categories&brand_id=1
 ```
 
 #### Get All Products
 ```
-GET /api/data.php?action=products&category_id=1
+GET /api/data.html?action=products&category_id=1
 ```
 
 #### Get Single Product
 ```
-GET /api/data.php?action=product&product_id=1
+GET /api/data.html?action=product&product_id=1
 ```
 
 #### Get Extras
 ```
-GET /api/data.php?action=extras
+GET /api/data.html?action=extras
 ```
 
 #### Get Additional Items
 ```
-GET /api/data.php?action=additional_items
+GET /api/data.html?action=additional_items
 ```
 
-### Admin Management API (`api/admin.php`)
+### Admin Management API (`api/admin.html`)
 
 All admin endpoints require POST requests.
 
 #### Category Management
 ```
-POST /api/admin.php?action=create_category
+POST /api/admin.html?action=create_category
 Body: {brand_id, name, enable_serving, packaging_fee}
 
-POST /api/admin.php?action=update_category
+POST /api/admin.html?action=update_category
 Body: {id, brand_id, name, enable_serving, packaging_fee}
 
-POST /api/admin.php?action=delete_category
+POST /api/admin.html?action=delete_category
 Body: {id}
 ```
 
 #### Product Management
 ```
-POST /api/admin.php?action=create_product
+POST /api/admin.html?action=create_product
 Body: {category_id, name, description, price, image}
 
-POST /api/admin.php?action=update_product
+POST /api/admin.html?action=update_product
 Body: {id, category_id, name, description, price, image}
 
-POST /api/admin.php?action=delete_product
+POST /api/admin.html?action=delete_product
 Body: {id}
 ```
 
 #### Extras Management
 ```
-POST /api/admin.php?action=create_extra
+POST /api/admin.html?action=create_extra
 Body: {name, price}
 
-POST /api/admin.php?action=update_extra
+POST /api/admin.html?action=update_extra
 Body: {id, name, price}
 
-POST /api/admin.php?action=delete_extra
+POST /api/admin.html?action=delete_extra
 Body: {id}
 
-POST /api/admin.php?action=link_extra
+POST /api/admin.html?action=link_extra
 Body: {product_id, extra_id}
 
-POST /api/admin.php?action=unlink_extra
+POST /api/admin.html?action=unlink_extra
 Body: {product_id, extra_id}
 ```
 
 #### Additional Items Management
 ```
-POST /api/admin.php?action=create_additional_item
+POST /api/admin.html?action=create_additional_item
 Body: {name, price}
 
-POST /api/admin.php?action=update_additional_item
+POST /api/admin.html?action=update_additional_item
 Body: {id, name, price}
 
-POST /api/admin.php?action=delete_additional_item
+POST /api/admin.html?action=delete_additional_item
 Body: {id}
 
-POST /api/admin.php?action=link_additional_item
+POST /api/admin.html?action=link_additional_item
 Body: {product_id, additional_item_id}
 
-POST /api/admin.php?action=unlink_additional_item
+POST /api/admin.html?action=unlink_additional_item
 Body: {product_id, additional_item_id}
 ```
 
@@ -168,7 +168,7 @@ Add to your HTML pages (in this order):
 
 ### 2. Update Category Pages
 
-In your category page (e.g., `mie-minull/index.php`):
+In your category page (e.g., `mie-minull/index.html`):
 
 ```html
 <div class="menu-grid" id="categoryProductGrid"></div>
@@ -297,7 +297,7 @@ Customize in `src/order-modal.js`:
 
 ### API Endpoints
 
-Modify in `api/data.php` and `api/admin.php`:
+Modify in `api/data.html` and `api/admin.html`:
 
 - Add authentication in `requireAdmin()` function
 - Add logging or analytics
@@ -309,8 +309,8 @@ Modify in `api/data.php` and `api/admin.php`:
 
 1. **Setup Database**:
    ```bash
-   php config/setup-db.php
-   php config/seed-data.php
+   php config/setup-db.html
+   php config/seed-data.html
    ```
 
 2. **Test Product Loading**:
@@ -355,7 +355,7 @@ The modal is fully responsive:
 ### Products not loading
 - Check browser console for errors
 - Verify API endpoint is accessible
-- Check database connection in `config/database.php`
+- Check database connection in `config/database.html`
 
 ### Modal not appearing
 - Check `order-modal.js` is loaded
@@ -374,7 +374,7 @@ The modal is fully responsive:
 
 ## 📝 Example Integration
 
-Complete example for `mie-minull/index.php`:
+Complete example for `mie-minull/index.html`:
 
 ```html
 <?php
@@ -392,19 +392,19 @@ session_start();
 <body data-category-page="mie-minull">
   <script>
     window.MENULL_PAGE_CONTEXT = {
-      checkoutUrl: '../checkout.php',
-      customerInfoUrl: '../customer-info.php',
-      sessionEndpoint: '../src/cart-session.php',
+      checkoutUrl: '../checkout.html',
+      customerInfoUrl: '../customer-info.html',
+      sessionEndpoint: '../src/cart-session.html',
       waNumber: '6281292401513'
     };
   </script>
 
   <nav class="navbar navbar-order">
-    <a class="brand" href="../index.php">
+    <a class="brand" href="../index.html">
       <img src="../assets/logomenulnew.png" alt="Logo" />
       <span class="brand-name">Roti Menull Knk</span>
     </a>
-    <a href="../index.php#menu" class="btn btn-outline btn-back">Back</a>
+    <a href="../index.html#menu" class="btn btn-outline btn-back">Back</a>
   </nav>
 
   <main>
@@ -437,5 +437,5 @@ session_start();
 For issues or questions, review the code comments in:
 - `src/order-modal.js` - Modal logic
 - `src/enhanced-cart.js` - Cart system
-- `api/data.php` - Data retrieval
-- `api/admin.php` - Admin operations
+- `api/data.html` - Data retrieval
+- `api/admin.html` - Admin operations

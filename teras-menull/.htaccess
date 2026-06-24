@@ -1,1 +1,2 @@
-DirectoryIndex index.php index.html
+DirectoryIndex index.html
+AddHandler application/x-httpd-php .html

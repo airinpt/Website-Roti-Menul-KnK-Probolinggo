@@ -3,8 +3,8 @@
  * Handles all admin functionality for managing products, categories, extras, and items
  */
 
-const API_BASE = '../api/data.php';
-const ADMIN_API = '../api/admin.php';
+const API_BASE = '../api/data.html';
+const ADMIN_API = '../api/admin.html';
 
 class AdminPanel {
   constructor() {

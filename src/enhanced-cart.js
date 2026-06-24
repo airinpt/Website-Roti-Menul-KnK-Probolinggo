@@ -154,7 +154,7 @@ class EnhancedCartSystem {
 
   static async syncToSession() {
     try {
-      const response = await fetch('../src/cart-session.php', {
+      const response = await fetch('../src/cart-session.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
