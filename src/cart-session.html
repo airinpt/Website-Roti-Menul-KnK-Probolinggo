@@ -30,12 +30,17 @@ function normalize_cart(array $cart): array
                 'id' => $item['id'] ?? uniqid('item_'),
                 'product_name' => $item['product_name'],
                 'product_id' => $item['product_id'] ?? 0,
+                'brand_id' => $item['brand_id'] ?? null,
+                'brand_name' => $item['brand_name'] ?? null,
                 'category_name' => $item['category_name'] ?? 'Menull',
                 'base_price' => $item['base_price'] ?? 0,
                 'packaging_fee' => $item['packaging_fee'] ?? 0,
                 'serving_option' => $item['serving_option'] ?? 'Dine In',
                 'selected_extras' => $item['selected_extras'] ?? [],
                 'selected_additional_items' => $item['selected_additional_items'] ?? [],
+                'selectedPackageItems' => $item['selectedPackageItems'] ?? [],
+                'selectedVariantNames' => $item['selectedVariantNames'] ?? [],
+                'packageItemNames' => $item['packageItemNames'] ?? [],
                 'notes' => $item['notes'] ?? '',
                 'quantity' => $item['quantity'] ?? 1,
                 'unit_price' => $item['unit_price'] ?? 0,
@@ -60,6 +65,12 @@ function normalize_cart(array $cart): array
                 'category' => $category,
                 'price' => $price,
                 'quantity' => $quantity,
+                'extras' => $item['extras'] ?? [],
+                'additional_items' => $item['additional_items'] ?? [],
+                'package_items' => $item['package_items'] ?? [],
+                'selected_variants' => $item['selected_variants'] ?? [],
+                'serving_option' => $item['serving_option'] ?? null,
+                'brand_id' => $item['brand_id'] ?? null,
             ];
         }
     }
@@ -95,6 +106,12 @@ if ($isEnhanced) {
             'price' => $item['unit_price'] ?? $item['base_price'],
             'quantity' => $item['quantity'],
             'subtotal' => $item['subtotal'],
+            'extras' => $item['selected_extras'] ?? [],
+            'additional_items' => $item['selected_additional_items'] ?? [],
+            'package_items' => $item['selectedPackageItems'] ?? [],
+            'selected_variants' => $item['selectedVariantNames'] ?? [],
+            'serving_option' => $item['serving_option'] ?? null,
+            'brand_id' => $item['brand_id'] ?? null,
         ];
     }, $cart);
     $_SESSION['menull_order_notes'] = $notes;

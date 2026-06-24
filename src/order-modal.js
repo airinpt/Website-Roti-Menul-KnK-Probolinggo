@@ -121,6 +121,29 @@ class OrderConfigurationModal {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(value || 0);
   }
 
+  getAssetBasePath() {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    const depth = path.split('/').filter(Boolean).length;
+    return depth > 2 ? '../assets/' : './assets/';
+  }
+
+  resolveImagePath(imagePath) {
+    if (!imagePath) {
+      return 'https://placehold.co/400x200/f0e1d3/6b4632?text=No+Image';
+    }
+
+    if (/^(https?:)?\/\//i.test(imagePath) || imagePath.startsWith('data:') || imagePath.startsWith('/')) {
+      return imagePath;
+    }
+
+    const normalized = imagePath
+      .replace(/^(\.\.\/)?assets\//, '')
+      .replace(/^\.\/assets\//, '')
+      .replace(/^assets\//, '');
+
+    return `${this.getAssetBasePath()}${normalized}`;
+  }
+
   open(product) {
     this.currentProduct = product;
     this.selectedConfig = {
@@ -135,7 +158,7 @@ class OrderConfigurationModal {
     document.getElementById('modalTitle').textContent = product.name || '';
     document.getElementById('modalBrand').textContent = product.brand_name || '';
     document.getElementById('modalPrice').textContent = this.formatCurrency(product.price);
-    document.getElementById('modalImage').src = product.image ? `../assets/${product.image}` : 'https://placehold.co/400x200/f0e1d3/6b4632?text=No+Image';
+    document.getElementById('modalImage').src = this.resolveImagePath(product.image);
     document.getElementById('priceBase').textContent = this.formatCurrency(product.price);
     document.getElementById('qtyValue').textContent = '1';
 

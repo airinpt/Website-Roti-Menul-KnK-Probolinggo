@@ -8,34 +8,45 @@ $initialNotes = '';
 
 $cartData = $_SESSION['menull_cart_enhanced'] ?? [];
 
+function normalize_customer_cart_item(array $item): array
+{
+    $extras = $item['selected_extras'] ?? ($item['extras'] ?? []);
+    $additionalItems = $item['selected_additional_items'] ?? ($item['additional_items'] ?? []);
+    $packageItems = $item['selectedPackageItems'] ?? ($item['package_items'] ?? []);
+    $selectedVariants = $item['selectedVariantNames'] ?? ($item['selected_variants'] ?? []);
+    $quantity = max(1, (int)($item['quantity'] ?? 1));
+    $basePrice = (int)($item['base_price'] ?? $item['price'] ?? 0);
+    $packagingFee = (int)($item['packaging_fee'] ?? 0);
+    $extrasTotal = array_sum(array_map('intval', array_column(is_array($extras) ? $extras : [], 'price')));
+    $additionalTotal = array_sum(array_map('intval', array_column(is_array($additionalItems) ? $additionalItems : [], 'price')));
+    $pricePerItem = (int)($item['unit_price'] ?? ($basePrice + $packagingFee + $extrasTotal + $additionalTotal));
+    $subtotal = (int)($item['subtotal'] ?? ($pricePerItem * $quantity));
+
+    return [
+        'id' => $item['id'] ?? '',
+        'name' => $item['product_name'] ?? ($item['name'] ?? ''),
+        'category' => $item['category_name'] ?? ($item['category'] ?? 'Menull'),
+        'price' => $pricePerItem,
+        'quantity' => $quantity,
+        'subtotal' => $subtotal,
+        'notes' => $item['notes'] ?? '',
+        'serving_option' => $item['serving_option'] ?? 'Dine In',
+        'extras' => is_array($extras) ? $extras : [],
+        'additional_items' => is_array($additionalItems) ? $additionalItems : [],
+        'package_items' => is_array($packageItems) ? $packageItems : [],
+        'selected_variants' => is_array($selectedVariants) ? $selectedVariants : [],
+        'brand_id' => $item['brand_id'] ?? null,
+    ];
+}
+
 if (!empty($cartData)) {
-    $initialCart = array_map(function($item) {
-        $pricePerItem = $item['base_price'] + $item['packaging_fee'] + 
-                        array_sum(array_column($item['selected_extras'] ?? [], 'price')) +
-                        array_sum(array_column($item['selected_additional_items'] ?? [], 'price'));
-        
-        return [
-            'id' => $item['id'],
-            'name' => $item['product_name'],
-            'category' => $item['category_name'] ?? 'Menull',
-            'price' => $pricePerItem,
-            'quantity' => $item['quantity'],
-            'subtotal' => $item['subtotal'],
-            'notes' => $item['notes'] ?? '',
-            'serving_option' => $item['serving_option'] ?? 'Dine In',
-            'extras' => $item['selected_extras'] ?? [],
-            'additional_items' => $item['selected_additional_items'] ?? [],
-            'package_items' => $item['selectedPackageItems'] ?? [],
-            'selected_variants' => $item['selectedVariantNames'] ?? [],
-            'brand_id' => $item['brand_id'] ?? null,
-        ];
-    }, $cartData);
+    $initialCart = array_map('normalize_customer_cart_item', $cartData);
     
     $initialNotes = $_SESSION['menull_notes_enhanced'] ?? '';
 }
 
 if (empty($initialCart) && isset($_SESSION['menull_cart'])) {
-    $initialCart = $_SESSION['menull_cart'];
+    $initialCart = array_map('normalize_customer_cart_item', $_SESSION['menull_cart']);
     $initialNotes = $_SESSION['menull_order_notes'] ?? '';
 }
 ?>
