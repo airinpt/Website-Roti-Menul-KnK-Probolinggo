@@ -122,9 +122,13 @@ class OrderConfigurationModal {
   }
 
   getAssetBasePath() {
+    const contextBase = window.MENULL_PAGE_CONTEXT?.assetBaseUrl;
+    if (contextBase) return contextBase;
+
     const path = window.location.pathname.replace(/\\/g, '/');
-    const depth = path.split('/').filter(Boolean).length;
-    return depth > 2 ? '../assets/' : './assets/';
+    return path.includes('/mie-minull/') || path.includes('/roti-menull/') || path.includes('/teras-menull/')
+      ? '../assets/'
+      : './assets/';
   }
 
   resolveImagePath(imagePath) {

@@ -280,6 +280,10 @@ session_start();
       `).join('');
     }
 
+    window.MENULL_PAGE_CONTEXT = {
+      assetBaseUrl: './assets/'
+    };
+
     // Reviews
     function renderReviews() {
       const shell = document.getElementById('reviewShell');
