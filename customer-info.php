@@ -1,0 +1,210 @@
+<?php
+declare(strict_types=1);
+session_start();
+
+// Read enhanced cart from session
+$initialCart = [];
+$initialNotes = '';
+
+$cartData = $_SESSION['menull_cart_enhanced'] ?? [];
+
+if (!empty($cartData)) {
+    $initialCart = array_map(function($item) {
+        $pricePerItem = $item['base_price'] + $item['packaging_fee'] + 
+                        array_sum(array_column($item['selected_extras'] ?? [], 'price')) +
+                        array_sum(array_column($item['selected_additional_items'] ?? [], 'price'));
+        
+        return [
+            'id' => $item['id'],
+            'name' => $item['product_name'],
+            'category' => $item['category_name'] ?? 'Menull',
+            'price' => $pricePerItem,
+            'quantity' => $item['quantity'],
+            'subtotal' => $item['subtotal'],
+            'notes' => $item['notes'] ?? '',
+            'serving_option' => $item['serving_option'] ?? 'Dine In',
+            'extras' => $item['selected_extras'] ?? [],
+            'additional_items' => $item['selected_additional_items'] ?? [],
+            'package_items' => $item['selectedPackageItems'] ?? [],
+            'selected_variants' => $item['selectedVariantNames'] ?? [],
+            'brand_id' => $item['brand_id'] ?? null,
+        ];
+    }, $cartData);
+    
+    $initialNotes = $_SESSION['menull_notes_enhanced'] ?? '';
+}
+
+if (empty($initialCart) && isset($_SESSION['menull_cart'])) {
+    $initialCart = $_SESSION['menull_cart'];
+    $initialNotes = $_SESSION['menull_order_notes'] ?? '';
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Information | Roti Menull Knk</title>
+  <link rel="icon" type="image/png" href="./assets/logomenulnew.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .order-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .step-bar {
+      justify-content: center !important;
+    }
+    .section-header {
+      text-align: center;
+    }
+    .customer-page-wrap {
+      max-width: 100%;
+    }
+    @media (max-width: 768px) {
+      .order-section {
+        padding: 16px 12px 40px !important;
+      }
+      .summary-panel, .customer-panel, .cart-panel {
+        padding: 16px !important;
+      }
+      .checkout-actions, .customer-actions {
+        flex-direction: column !important;
+      }
+      .checkout-actions .btn, .customer-actions .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .order-section {
+        padding: 12px 8px 32px !important;
+      }
+      .summary-panel, .customer-panel, .cart-panel {
+        padding: 12px !important;
+        border-radius: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body class="order-body">
+  <script>
+    window.MENULL_PAGE_CONTEXT = {
+      checkoutUrl: './checkout.php',
+      customerInfoUrl: './customer-info.php',
+      sessionEndpoint: './src/cart-session.php',
+      waNumber: '6281292401513'
+    };
+    window.MENULL_INITIAL_CART = <?php echo json_encode($initialCart, JSON_UNESCAPED_UNICODE); ?>;
+    window.MENULL_INITIAL_NOTES = <?php echo json_encode((string)$initialNotes, JSON_UNESCAPED_UNICODE); ?>;
+  </script>
+
+  <nav class="navbar navbar-order">
+    <a class="brand" href="./index.php">
+      <img src="./assets/logomenulnew.png" alt="Roti Menull Knk" class="brand-logo" />
+      <span class="brand-name">Roti Menull Knk</span>
+    </a>
+    <a href="./checkout.php" class="btn btn-outline btn-back">Kembali ke Checkout</a>
+  </nav>
+
+  <main class="order-page">
+    <section class="section order-section">
+      <div class="step-bar is-three-steps">
+        <div class="step-item">
+          <div class="step-dot">1</div>
+          <span>Menu</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item">
+          <div class="step-dot">2</div>
+          <span>Checkout</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item active">
+          <div class="step-dot">3</div>
+          <span>Info</span>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h1>Customer Information</h1>
+        <p>Lengkapi data pelanggan untuk melanjutkan pesanan.</p>
+      </div>
+
+      <div class="customer-page-wrap">
+        <div class="summary-panel">
+          <h2 style="margin-bottom:14px;font-family:var(--font-display);color:var(--brown-800);">Ringkasan Pesanan</h2>
+          <div id="customerSummary"></div>
+          <div class="order-notes-box">
+            <label>
+              Catatan Pesanan
+              <textarea id="customerNotes" readonly></textarea>
+            </label>
+          </div>
+        </div>
+
+        <form class="customer-panel" id="customerForm" novalidate>
+          <div class="form-grid">
+            <label>
+              Nama Lengkap *
+              <input type="text" name="nama" placeholder="Contoh: Airin Dian Zahraputri" required />
+            </label>
+            <label>
+              No HP / WhatsApp *
+              <input type="tel" name="nohp" placeholder="08xxxxxxxxxx" required />
+            </label>
+            <label>
+              Tanggal Ambil *
+              <input type="date" name="tanggal_ambil" required />
+            </label>
+            <label>
+              Jam Ambil *
+              <input type="time" name="jam_ambil" required />
+            </label>
+          </div>
+
+          <div class="customer-actions">
+            <button class="btn btn-primary btn-lg wa-btn" type="submit" style="background:#25D366;color:#fff;">Kirim Pesanan via WhatsApp</button>
+            <a class="btn btn-outline btn-lg" href="./index.php#menu">Selesai, kembali ke menu</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h3>Roti Menull Knk</h3>
+        <p>Senin-Sabtu 09.00-22.00</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="./index.php#beranda">Beranda</a></li>
+          <li><a href="./index.php#menu">Menu</a></li>
+          <li><a href="./index.php#location">Location</a></li>
+          <li><a href="./index.php#review">Review</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>0812-9240-1513</li>
+          <li>@roti_menull_knk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Roti Menull Knk. All rights reserved.</span>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">↑</button>
+  <script src="./src/enhanced-cart.js"></script>
+  <script src="./src/order-summary.js"></script>
+</body>
+</html>

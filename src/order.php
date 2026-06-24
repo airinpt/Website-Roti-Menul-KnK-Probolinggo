@@ -1,10 +1,14 @@
+<?php
+declare(strict_types=1);
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pesan | Roti Menull Knk</title>
-  <link rel="icon" type="image/png" href="../assets/logomenul.png" />
+  <link rel="icon" type="image/png" href="../assets/logomenulnew.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -241,11 +245,11 @@
 <body class="order-body">
 
   <nav class="navbar navbar-order">
-    <a class="brand" href="../index.html">
-      <img src="../assets/logomenul.png" alt="Roti Menull Knk" class="brand-logo" />
+    <a class="brand" href="../index.php">
+      <img src="../assets/logomenulnew.png" alt="Roti Menull Knk" class="brand-logo" />
       <span class="brand-name">Roti Menull Knk</span>
     </a>
-    <a href="../index.html" class="btn btn-outline btn-back">← Kembali</a>
+    <a href="../index.php" class="btn btn-outline btn-back">← Kembali</a>
   </nav>
 
   <main class="order-page">
@@ -265,7 +269,7 @@
 
       <div id="step1">
         <div class="section-header">
-          <h1>Pilih Pesananmu 🍞</h1>
+          <h1>Pilih Pesananmu</h1>
           <p>Klik kategori untuk lihat varian rasa, lalu tambahkan jumlah yang diinginkan.</p>
         </div>
 
@@ -273,14 +277,14 @@
         </div>
 
         <div class="order-preview" id="orderPreview" style="display:none">
-          <h4>🛒 Pesanan Kamu</h4>
+          <h4>Pesanan Kamu</h4>
           <div id="previewList"></div>
           <div class="preview-total">Total: <strong id="previewTotal">Rp 0</strong></div>
         </div>
 
         <div class="step-actions">
-          <button class="btn btn-primary btn-lg" id="btnNext" disabled>
             Selanjutnya →
+            Selanjutnya â†’
           </button>
           <p class="step-hint" id="stepHint">Pilih minimal 1 produk untuk melanjutkan.</p>
         </div>
@@ -288,7 +292,7 @@
 
       <div id="step2" style="display:none">
         <div class="section-header">
-          <h1>Data Pemesan 📋</h1>
+          <h1>Data Pemesan</h1>
           <p>Lengkapi data agar pesananmu bisa kami siapkan.</p>
         </div>
 
@@ -321,7 +325,7 @@
           <div class="form-actions">
             <button class="btn btn-outline" type="button" id="btnBack">← Kembali ke Menu</button>
             <button class="btn btn-primary btn-lg wa-btn" type="submit">
-              💬 Kirim Pesanan via WhatsApp
+              Kirim Pesanan via WhatsApp
             </button>
           </div>
         </form>
@@ -333,33 +337,32 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div>
-        <h3>🍞 Roti Menull Knk</h3>
-        <p>Senin–Sabtu &nbsp;09.00–22.00</p>
+        <h3>Roti Menull Knk</h3>
+        <p>Senin-Sabtu &nbsp;09.00-22.00</p>
       </div>
       <div>
         <h4>Navigasi</h4>
         <ul>
-          <li><a href="../index.html#beranda">Beranda</a></li>
-          <li><a href="../index.html#menu">Menu</a></li>
-          <li><a href="../index.html#location">Location</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
-          <li><a href="../index.html#review">Review</a></li>
+          <li><a href="../index.php#beranda">Beranda</a></li>
+          <li><a href="../index.php#menu">Menu</a></li>
+          <li><a href="../index.php#location">Location</a></li>
+          <li><a href="../index.php#contact">Contact</a></li>
+          <li><a href="../index.php#review">Review</a></li>
         </ul>
       </div>
       <div>
         <h4>Contact</h4>
         <ul>
-          <li>💬 0812-9240-1513</li>
-          <li>📸 @roti_menull_knk</li>
-          <li>🎵 @roti_menull_knk</li>
+          <li>WhatsApp 0812-9240-1513</li>
+          <li>TikTok @roti_menull_knk</li>
+          <li>TikTok @roti_menull_knk</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Roti Menull Knk. All rights reserved.</span>
+      <span>&copy; 2026 Roti Menull Knk. All rights reserved.</span>
     </div>
   </footer>
-
   <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">↑</button>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
@@ -367,7 +370,7 @@
     <div class="rasa-sheet">
       <div class="rasa-sheet-header">
         <h3 id="rasaTitle">Pilih Rasa</h3>
-        <button class="rasa-close" id="rasaClose" aria-label="Tutup">✕</button>
+        <button class="rasa-close" id="rasaClose" aria-label="Tutup">×</button>
       </div>
       <p class="rasa-sheet-sub" id="rasaSub">Pilih varian rasa yang kamu inginkan</p>
       <div class="rasa-list" id="rasaList"></div>

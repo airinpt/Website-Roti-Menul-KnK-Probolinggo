@@ -1,0 +1,131 @@
+<?php
+/**
+ * Brand Class
+ * Manages brand operations
+ */
+
+require_once __DIR__ . '/../config/database.php';
+
+class Brand {
+    private $db;
+    private $table = 'brands';
+
+    public function __construct() {
+        $this->db = Database::getInstance()->getConnection();
+    }
+
+    /**
+     * Get all brands
+     */
+    public function getAll() {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} ORDER BY name");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get brand by ID
+     */
+    public function getById($id) {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get brand by slug
+     */
+    public function getBySlug($slug) {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE slug = ?");
+        $stmt->execute([$slug]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Create brand
+     */
+    public function create($data) {
+        $stmt = $this->db->prepare("
+            INSERT INTO {$this->table} (name, slug, description) 
+            VALUES (?, ?, ?)
+        ");
+        return $stmt->execute([
+            $data['name'],
+            $data['slug'],
+            $data['description'] ?? null
+        ]);
+    }
+
+    /**
+     * Update brand
+     */
+    public function update($id, $data) {
+        $stmt = $this->db->prepare("
+            UPDATE {$this->table} 
+            SET name = ?, slug = ?, description = ? 
+            WHERE id = ?
+        ");
+        return $stmt->execute([
+            $data['name'],
+            $data['slug'],
+            $data['description'] ?? null,
+            $id
+        ]);
+    }
+
+    /**
+     * Delete brand
+     */
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
+    /**
+     * Get categories for a brand
+     */
+    public function getCategories($brandId) {
+        $stmt = $this->db->prepare("
+            SELECT c.*, b.name as brand_name 
+            FROM categories c
+            JOIN brands b ON c.brand_id = b.id
+            WHERE c.brand_id = ?
+            ORDER BY c.sort_order, c.name
+        ");
+        $stmt->execute([$brandId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get products for a brand
+     */
+    public function getProducts($brandId) {
+        $stmt = $this->db->prepare("
+            SELECT p.*, c.name as category_name, c.brand_id
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            WHERE c.brand_id = ? AND p.is_available = 1
+            ORDER BY c.sort_order, p.sort_order, p.name
+        ");
+        $stmt->execute([$brandId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get brand by name
+     */
+    public function getByName($name) {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE name = ?");
+        $stmt->execute([$name]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Count total brands
+     */
+    public function count() {
+        $stmt = $this->db->query("SELECT COUNT(*) as total FROM {$this->table}");
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] ?? 0;
+    }
+}
