@@ -1,56 +1,3 @@
-<?php
-declare(strict_types=1);
-session_start();
-
-// Read enhanced cart from session
-$initialCart = [];
-$initialNotes = '';
-
-$cartData = $_SESSION['menull_cart_enhanced'] ?? [];
-
-function normalize_checkout_cart_item(array $item): array
-{
-    $extras = $item['selected_extras'] ?? ($item['extras'] ?? []);
-    $additionalItems = $item['selected_additional_items'] ?? ($item['additional_items'] ?? []);
-    $packageItems = $item['selectedPackageItems'] ?? ($item['package_items'] ?? []);
-    $selectedVariants = $item['selectedVariantNames'] ?? ($item['selected_variants'] ?? []);
-    $quantity = max(1, (int)($item['quantity'] ?? 1));
-    $basePrice = (int)($item['base_price'] ?? $item['price'] ?? 0);
-    $packagingFee = (int)($item['packaging_fee'] ?? 0);
-    $extrasTotal = array_sum(array_map('intval', array_column(is_array($extras) ? $extras : [], 'price')));
-    $additionalTotal = array_sum(array_map('intval', array_column(is_array($additionalItems) ? $additionalItems : [], 'price')));
-    $pricePerItem = (int)($item['unit_price'] ?? ($basePrice + $packagingFee + $extrasTotal + $additionalTotal));
-    $subtotal = (int)($item['subtotal'] ?? ($pricePerItem * $quantity));
-
-    return [
-        'id' => $item['id'] ?? '',
-        'name' => $item['product_name'] ?? ($item['name'] ?? ''),
-        'category' => $item['category_name'] ?? ($item['category'] ?? 'Menull'),
-        'price' => $pricePerItem,
-        'quantity' => $quantity,
-        'subtotal' => $subtotal,
-        'notes' => $item['notes'] ?? '',
-        'serving_option' => $item['serving_option'] ?? 'Dine In',
-        'extras' => is_array($extras) ? $extras : [],
-        'additional_items' => is_array($additionalItems) ? $additionalItems : [],
-        'package_items' => is_array($packageItems) ? $packageItems : [],
-        'selected_variants' => is_array($selectedVariants) ? $selectedVariants : [],
-        'brand_id' => $item['brand_id'] ?? null,
-    ];
-}
-
-if (!empty($cartData)) {
-    $initialCart = array_map('normalize_checkout_cart_item', $cartData);
-    
-    $initialNotes = $_SESSION['menull_notes_enhanced'] ?? '';
-}
-
-// If no enhanced cart, try old cart format
-if (empty($initialCart) && isset($_SESSION['menull_cart'])) {
-    $initialCart = array_map('normalize_checkout_cart_item', $_SESSION['menull_cart']);
-    $initialNotes = $_SESSION['menull_order_notes'] ?? '';
-}
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -110,11 +57,11 @@ if (empty($initialCart) && isset($_SESSION['menull_cart'])) {
     window.MENULL_PAGE_CONTEXT = {
       checkoutUrl: './checkout.html',
       customerInfoUrl: './customer-info.html',
-      sessionEndpoint: './src/cart-session.html',
+      sessionEndpoint: '',
       waNumber: '6281292401513'
     };
-    window.MENULL_INITIAL_CART = <?php echo json_encode($initialCart, JSON_UNESCAPED_UNICODE); ?>;
-    window.MENULL_INITIAL_NOTES = <?php echo json_encode((string)$initialNotes, JSON_UNESCAPED_UNICODE); ?>;
+    window.MENULL_INITIAL_CART = [];
+    window.MENULL_INITIAL_NOTES = '';
   </script>
 
   <nav class="navbar navbar-order">

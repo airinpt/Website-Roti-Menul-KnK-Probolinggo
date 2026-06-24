@@ -1,7 +1,3 @@
-<?php
-declare(strict_types=1);
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,7 +15,7 @@ session_start();
     window.MENULL_PAGE_CONTEXT = {
       checkoutUrl: '../checkout.html',
       customerInfoUrl: '../customer-info.html',
-      sessionEndpoint: '../src/cart-session.html',
+      sessionEndpoint: '',
       waNumber: '6281292401513',
       assetBaseUrl: '../assets/'
     };
@@ -107,18 +103,6 @@ session_start();
         checkoutBtn.addEventListener('click', async () => {
           const cart = EnhancedCartSystem.getCart();
           if (cart.length === 0) return;
-
-          try {
-            await fetch('../src/cart-session.html', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                action: 'save',
-                cart: cart,
-                notes: ''
-              })
-            });
-          } catch (e) { }
 
           window.location.href = '../checkout.html';
         });

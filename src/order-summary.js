@@ -14,7 +14,7 @@ const ORDER_SUMMARY_CONTEXT = window.MENULL_PAGE_CONTEXT || {};
 const ORDER_SUMMARY_ROUTES = {
   checkout: ORDER_SUMMARY_CONTEXT.checkoutUrl || './checkout.html',
   customerInfo: ORDER_SUMMARY_CONTEXT.customerInfoUrl || './customer-info.html',
-  sessionEndpoint: ORDER_SUMMARY_CONTEXT.sessionEndpoint || './src/cart-session.html',
+  sessionEndpoint: ORDER_SUMMARY_CONTEXT.sessionEndpoint || '',
 };
 
 const ORDER_SUMMARY_WA_NUMBER = ORDER_SUMMARY_CONTEXT.waNumber || '6281292401513';

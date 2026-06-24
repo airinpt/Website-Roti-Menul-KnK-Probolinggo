@@ -5,7 +5,7 @@ const PAGE_CONTEXT = window.MENULL_PAGE_CONTEXT || {};
 const PAGE_ROUTES = {
   checkout: PAGE_CONTEXT.checkoutUrl || '../checkout.html',
   customerInfo: PAGE_CONTEXT.customerInfoUrl || '../customer-info.html',
-  sessionEndpoint: PAGE_CONTEXT.sessionEndpoint || '../src/cart-session.html'
+  sessionEndpoint: PAGE_CONTEXT.sessionEndpoint || ''
 };
 
 const WA_NUMBER = PAGE_CONTEXT.waNumber || '6281292401513';
