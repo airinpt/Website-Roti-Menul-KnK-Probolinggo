@@ -498,6 +498,7 @@ h1,h2,h3,h4 { margin: 0; }
 .floating-social.is-wa svg { fill: #25D366; }
 .floating-social.is-ig svg { fill: #c13584; }
 .floating-social.is-tt svg { fill: #111111; }
+.floating-social.is-fb svg { fill: #1877f2; }
 
 /* ── 13. CART PREVIEW ───────────────────────────────────────── */
 .cart-panel.order-preview {
