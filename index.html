@@ -476,7 +476,7 @@
 
       try {
         const loader = new ProductLoader();
-        const products = loader.getSampleProducts();
+        const products = await loader.loadProducts();
         renderAllProducts(buildCategoriesFromProducts(products));
       } catch (error) {
         console.warn('Homepage static data fallback activated:', error);
