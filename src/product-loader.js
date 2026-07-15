@@ -16,26 +16,6 @@ class ProductLoader {
 
   async loadProducts() {
     const fallbackProducts = this.getSampleProducts();
-
-    try {
-      const response = await fetch(this.apiUrl, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const payload = await response.json();
-      const products = Array.isArray(payload)
-        ? payload
-        : payload?.data?.products || payload?.products || [];
-
-      if (products.length > 0) {
-        this.products = this.sortProducts(products);
-        return this.products;
-      }
-    } catch (error) {
-      console.warn('Static product fallback activated:', error);
-    }
-
     this.products = this.sortProducts(fallbackProducts);
     return this.products;
   }

@@ -475,20 +475,12 @@
       }
 
       try {
-        const response = await fetch(API_BASE, { cache: 'no-store' });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const result = await response.json();
-        const products = Array.isArray(result)
-          ? result
-          : result?.data?.products || result?.products || [];
-
+        const loader = new ProductLoader();
+        const products = loader.getSampleProducts();
         renderAllProducts(buildCategoriesFromProducts(products));
       } catch (error) {
         console.warn('Homepage static data fallback activated:', error);
-        renderAllProducts(buildCategoriesFromProducts(new ProductLoader().getSampleProducts()));
+        renderAllProducts(FALLBACK_MENU_CATEGORIES);
       }
     }
 
