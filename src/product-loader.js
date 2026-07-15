@@ -156,6 +156,7 @@ class ProductLoader {
       const additionalJson = JSON.stringify(product.additional_items || []).replace(/'/g, "&#39;");
       const packageJson = JSON.stringify(product.package_items || []).replace(/'/g, "&#39;");
       const packagingJson = JSON.stringify(product.packaging_options || []).replace(/'/g, "&#39;");
+      const descriptionText = this.escapeHtml(product.description || '').trim();
       
       // Tentukan text tombol
       let buttonText = 'Add to Cart';
@@ -174,6 +175,7 @@ class ProductLoader {
                data-product-brand-id="${product.brand_id || ''}"
                data-product-category="${product.category_id || ''}"
                data-product-image="${product.image || ''}"
+               data-product-description="${this.escapeHtml(product.description || '')}"
                data-enable-serving="${product.enable_serving ? '1' : '0'}"
                data-packaging-fee="${product.packaging_fee || 0}"
                data-has-variants="${product.has_variants ? '1' : '0'}"
@@ -194,6 +196,7 @@ class ProductLoader {
         <div class="menu-meta">
           <div class="menu-name">${this.escapeHtml(product.name)}</div>
           <div class="menu-brand">${this.escapeHtml(product.brand_name || '')}</div>
+          ${descriptionText ? `<div class="menu-desc">${descriptionText}</div>` : ''}
           ${product.is_package ? `<div style="font-size:0.7rem;color:var(--brown-400);">Pilih Varian</div>` : ''}
           ${product.has_variants ? `<div style="font-size:0.7rem;color:var(--brown-400);">${product.variants.length} varian rasa</div>` : ''}
           ${product.price > 0 ? `<div class="menu-price">${this.formatCurrency(product.price)}</div>` : ''}
@@ -256,6 +259,7 @@ function openOrderModal(button) {
     brand_id: parseInt(card.dataset.productBrandId) || null,
     category_id: card.dataset.productCategory || null,
     image: card.dataset.productImage || '',
+    description: card.dataset.productDescription || '',
     enable_serving: card.dataset.enableServing === '1' || card.dataset.enableServing === 'true',
     packaging_fee: parseInt(card.dataset.packagingFee) || 0,
     has_variants: hasVariants,
