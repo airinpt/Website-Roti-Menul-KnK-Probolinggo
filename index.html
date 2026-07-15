@@ -248,6 +248,12 @@
       'Teras Menull': './teras-menull/index.html'
     };
 
+    const BRAND_DESCRIPTIONS = {
+      'MieeNull': 'Berbagai menu makanan hangat untuk santai atau makan cepat.',
+      'Roti Menull': 'Roti lembut signature dengan topping favorit pelanggan.',
+      'Teras Menull': 'Prasmanan nasi padang lengkap serta gorengan nikmat.'
+    };
+
     const FALLBACK_MENU_CATEGORIES = [
       {
         name: 'MieeNull',
@@ -290,13 +296,14 @@
       const grouped = new Map();
 
       products.forEach((product) => {
-        const key = product.brand_id || product.brand_name || product.category_name || product.name;
+        const brandName = product.brand_name || product.category_name || product.name;
+        const key = product.brand_id || brandName;
         if (!grouped.has(key)) {
           grouped.set(key, {
-            name: product.brand_name || product.category_name || product.name,
+            name: brandName,
             image: product.image || '',
-            desc: '',
-            link: BRAND_LINKS[product.brand_name] || './index.html#menu',
+            desc: BRAND_DESCRIPTIONS[brandName] || '',
+            link: BRAND_LINKS[brandName] || './index.html#menu',
             count: 0,
             order: Number(product.brand_id) || 999
           });
