@@ -40,6 +40,9 @@ class EnhancedCartSystem {
     let itemTotal = product.price;
     itemTotal += config.selectedExtras.reduce((sum, extra) => sum + extra.price, 0);
     itemTotal += config.selectedAdditionalItems.reduce((sum, item) => sum + item.price, 0);
+    if (config.selectedPackagingOption) {
+      itemTotal += config.selectedPackagingOption.price || 0;
+    }
 
     if (config.servingOption === 'Take Away' && product.packaging_fee) {
       itemTotal += product.packaging_fee;
@@ -72,6 +75,7 @@ class EnhancedCartSystem {
       selected_extras: config.selectedExtras,
       selected_additional_items: config.selectedAdditionalItems,
       selectedPackageItems: config.selectedPackageItems || [],
+      selected_packaging_option: config.selectedPackagingOption || null,
       packageItemNames: packageItemNames,
       selectedVariantNames: variantNames,
       notes: config.notes || '',
@@ -122,6 +126,9 @@ class EnhancedCartSystem {
       const items = item.selected_additional_items.map((i) => i.name).join(', ');
       summary += `\n+ ${items}`;
     }
+    if (item.selected_packaging_option && item.selected_packaging_option.name) {
+      summary += `\n+ Pilihan Box: ${item.selected_packaging_option.name}`;
+    }
     if (item.packageItemNames && item.packageItemNames.length > 0) {
       const pkg = item.packageItemNames.join(', ');
       summary += `\n+ ${pkg}`;
@@ -148,6 +155,9 @@ class EnhancedCartSystem {
     if (item.selected_additional_items && item.selected_additional_items.length > 0) {
       const itemsTotal = item.selected_additional_items.reduce((sum, i) => sum + i.price, 0);
       breakdown += ` + Items: ${this.formatCurrency(itemsTotal)}`;
+    }
+    if (item.selected_packaging_option && item.selected_packaging_option.price) {
+      breakdown += ` + Packaging Box: ${this.formatCurrency(item.selected_packaging_option.price)}`;
     }
     return breakdown;
   }

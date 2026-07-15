@@ -14,17 +14,31 @@ class ProductLoader {
       const data = await response.json();
       
       if (data.success && data.data.products && data.data.products.length > 0) {
-        this.products = data.data.products;
+        this.products = this.sortProducts(data.data.products);
         return this.products;
       }
       
-      this.products = this.getSampleProducts();
+      this.products = [];
       return this.products;
     } catch (error) {
       console.error('Error loading products:', error);
-      this.products = this.getSampleProducts();
+      this.products = [];
       return this.products;
     }
+  }
+
+  sortProducts(products) {
+    return [...products].sort((a, b) => {
+      const idA = Number(a?.id) || 0;
+      const idB = Number(b?.id) || 0;
+      if (idA !== idB) return idA - idB;
+
+      const brandA = String(a?.brand_name || '');
+      const brandB = String(b?.brand_name || '');
+      if (brandA !== brandB) return brandA.localeCompare(brandB);
+
+      return String(a?.name || '').localeCompare(String(b?.name || ''));
+    });
   }
 
   getSampleProducts() {
@@ -82,12 +96,12 @@ class ProductLoader {
     const grid = document.getElementById(this.gridId);
     if (!grid) return;
 
-    const products = this.products.length > 0 ? this.products : this.getSampleProducts();
+    const products = this.products;
 
     if (products.length === 0) {
       grid.innerHTML = `
         <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--brown-500);">
-          No products available
+          Tidak ada produk yang tersedia dari API.
         </div>
       `;
       return;
@@ -128,6 +142,7 @@ class ProductLoader {
       const extrasJson = JSON.stringify(product.extras || []).replace(/'/g, "&#39;");
       const additionalJson = JSON.stringify(product.additional_items || []).replace(/'/g, "&#39;");
       const packageJson = JSON.stringify(product.package_items || []).replace(/'/g, "&#39;");
+      const packagingJson = JSON.stringify(product.packaging_options || []).replace(/'/g, "&#39;");
       
       // Tentukan text tombol
       let buttonText = 'Add to Cart';
@@ -152,6 +167,7 @@ class ProductLoader {
                data-has-extras="${product.has_extras ? '1' : '0'}"
                data-is-package="${product.is_package ? '1' : '0'}"
                data-package-items='${packageJson}'
+               data-packaging-options='${packagingJson}'
                data-variants='${variantsJson}'
                data-extras='${extrasJson}'
                data-additional-items='${additionalJson}'
@@ -211,11 +227,13 @@ function openOrderModal(button) {
   let extras = [];
   let additionalItems = [];
   let packageItems = [];
+  let packagingOptions = [];
   
   try { variants = JSON.parse(card.dataset.variants || '[]'); } catch(e) { variants = []; }
   try { extras = JSON.parse(card.dataset.extras || '[]'); } catch(e) { extras = []; }
   try { additionalItems = JSON.parse(card.dataset.additionalItems || '[]'); } catch(e) { additionalItems = []; }
   try { packageItems = JSON.parse(card.dataset.packageItems || '[]'); } catch(e) { packageItems = []; }
+  try { packagingOptions = JSON.parse(card.dataset.packagingOptions || '[]'); } catch(e) { packagingOptions = []; }
 
   const product = {
     id: card.dataset.productId || button.dataset.productId,
@@ -233,7 +251,8 @@ function openOrderModal(button) {
     variants: variants,
     extras: extras,
     additional_items: additionalItems,
-    package_items: packageItems
+    package_items: packageItems,
+    packaging_options: packagingOptions
   };
 
   if (window.orderModal) {

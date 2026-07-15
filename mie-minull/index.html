@@ -123,15 +123,31 @@
         preview.hidden = false;
         const grandTotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
 
-        list.innerHTML = cart.map((item) => `
-          <div class="preview-item">
-            <span><strong>${item.product_name}</strong> × ${item.quantity}</span>
-            <div class="preview-actions">
-              <span style="white-space: nowrap">${EnhancedCartSystem.formatCurrency(item.subtotal)}</span>
-              <button class="preview-remove" type="button" data-remove-id="${item.id}" aria-label="Hapus pesanan">−</button>
+        list.innerHTML = cart.map((item) => {
+          const packageNames = (item.packageItemNames && item.packageItemNames.length)
+            ? item.packageItemNames
+            : (item.selectedVariantNames || []);
+          const packageLine = packageNames.length
+            ? `<div class="preview-item-variant">${packageNames.join(', ')}</div>`
+            : '';
+          const boxLine = item.selected_packaging_option?.name
+            ? `<div class="preview-item-variant">Box: ${item.selected_packaging_option.name}</div>`
+            : '';
+
+          return `
+            <div class="preview-item">
+              <span>
+                <strong>${item.product_name}</strong> × ${item.quantity}
+                ${packageLine}
+                ${boxLine}
+              </span>
+              <div class="preview-actions">
+                <span style="white-space: nowrap">${EnhancedCartSystem.formatCurrency(item.subtotal)}</span>
+                <button class="preview-remove" type="button" data-remove-id="${item.id}" aria-label="Hapus pesanan">−</button>
+              </div>
             </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
 
         total.textContent = EnhancedCartSystem.formatCurrency(grandTotal);
 

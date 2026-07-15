@@ -108,6 +108,13 @@ function buildConfigLines(item) {
     lines.push(`${osEsc(item.serving_option)}${feeNote}`);
   }
 
+  if (item.selected_packaging_option && item.selected_packaging_option.name) {
+    const packageNote = item.selected_packaging_option.price > 0
+      ? ` (+${EnhancedCartSystem.formatCurrency(item.selected_packaging_option.price)})`
+      : '';
+    lines.push(`Pilihan Box: ${osEsc(item.selected_packaging_option.name)}${packageNote}`);
+  }
+
   if (item.selected_extras && item.selected_extras.length) {
     lines.push(`Extra: ${item.selected_extras.map((e) => osEsc(e.name)).join(', ')}`);
   }

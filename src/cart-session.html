@@ -39,6 +39,7 @@ function normalize_cart(array $cart): array
                 'selected_extras' => $item['selected_extras'] ?? [],
                 'selected_additional_items' => $item['selected_additional_items'] ?? [],
                 'selectedPackageItems' => $item['selectedPackageItems'] ?? [],
+                'selected_packaging_option' => $item['selected_packaging_option'] ?? null,
                 'selectedVariantNames' => $item['selectedVariantNames'] ?? [],
                 'packageItemNames' => $item['packageItemNames'] ?? [],
                 'notes' => $item['notes'] ?? '',
@@ -69,6 +70,7 @@ function normalize_cart(array $cart): array
                 'additional_items' => $item['additional_items'] ?? [],
                 'package_items' => $item['package_items'] ?? [],
                 'selected_variants' => $item['selected_variants'] ?? [],
+                'selected_packaging_option' => $item['selected_packaging_option'] ?? null,
                 'serving_option' => $item['serving_option'] ?? null,
                 'brand_id' => $item['brand_id'] ?? null,
             ];
@@ -110,6 +112,7 @@ if ($isEnhanced) {
             'additional_items' => $item['selected_additional_items'] ?? [],
             'package_items' => $item['selectedPackageItems'] ?? [],
             'selected_variants' => $item['selectedVariantNames'] ?? [],
+            'selected_packaging_option' => $item['selected_packaging_option'] ?? null,
             'serving_option' => $item['serving_option'] ?? null,
             'brand_id' => $item['brand_id'] ?? null,
         ];

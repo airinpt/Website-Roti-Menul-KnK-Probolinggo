@@ -240,8 +240,14 @@
   </footer>
 
   <script>
-    // Menu categories
-    const MENU_CATEGORIES = [
+    const API_BASE = './api/data.html';
+    const BRAND_LINKS = {
+      'MieeNull': './mie-minull/index.html',
+      'Roti Menull': './roti-menull/index.html',
+      'Teras Menull': './teras-menull/index.html'
+    };
+
+    const FALLBACK_MENU_CATEGORIES = [
       {
         name: 'MieeNull',
         image: 'foto_produk_mieenull/burger.jpeg',
@@ -262,13 +268,58 @@
       }
     ];
 
-    function renderAllProducts() {
+    function resolveAssetPath(imagePath) {
+      if (!imagePath) {
+        return 'https://placehold.co/300x300/f0e1d3/6b4632?text=No+Image';
+      }
+
+      if (/^(https?:)?\/\//i.test(imagePath) || imagePath.startsWith('data:') || imagePath.startsWith('/')) {
+        return imagePath;
+      }
+
+      const normalized = imagePath
+        .replace(/^(\.\.\/)?assets\//, '')
+        .replace(/^\.\/assets\//, '')
+        .replace(/^assets\//, '');
+
+      return `./assets/${normalized}`;
+    }
+
+    function buildCategoriesFromProducts(products) {
+      const grouped = new Map();
+
+      products.forEach((product) => {
+        const key = product.brand_id || product.brand_name || product.category_name || product.name;
+        if (!grouped.has(key)) {
+          grouped.set(key, {
+            name: product.brand_name || product.category_name || product.name,
+            image: product.image || '',
+            desc: '',
+            link: BRAND_LINKS[product.brand_name] || './index.html#menu',
+            count: 0,
+            order: Number(product.brand_id) || 999
+          });
+        }
+
+        const entry = grouped.get(key);
+        entry.count += 1;
+        if (!entry.image && product.image) {
+          entry.image = product.image;
+        }
+      });
+
+    }
+
+    function renderAllProducts(categories) {
       const grid = document.getElementById('allProductGrid');
       if (!grid) return;
-      grid.innerHTML = MENU_CATEGORIES.map((item, index) => `
+
+      const items = categories && categories.length > 0 ? categories : FALLBACK_MENU_CATEGORIES;
+
+      grid.innerHTML = items.map((item, index) => `
         <article class="menu-card category-card" style="animation-delay:${index * 90}ms">
           <div class="menu-photo">
-            <img src="./assets/${item.image}" alt="${item.name}" loading="lazy"
+            <img src="${resolveAssetPath(item.image)}" alt="${item.name}" loading="lazy"
                  onerror="this.onerror=null;this.src='https://placehold.co/300x300/f0e1d3/6b4632?text=No+Image';" />
           </div>
           <div class="menu-meta">
@@ -415,8 +466,25 @@
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
+    async function loadHomepageCategories() {
+      const grid = document.getElementById('allProductGrid');
+      if (grid) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 32px; color: #6b4632;">Memuat menu...</div>';
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}?action=products`);
+        const result = await response.json();
+        const products = result?.data?.products || [];
+        renderAllProducts(buildCategoriesFromProducts(products));
+      } catch (error) {
+        console.error('Failed to load homepage categories:', error);
+        renderAllProducts(FALLBACK_MENU_CATEGORIES);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      renderAllProducts();
+      loadHomepageCategories();
       renderReviews();
     });
   </script>

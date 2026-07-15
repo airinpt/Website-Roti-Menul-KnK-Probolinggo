@@ -100,11 +100,15 @@
           const variantLine = variantNames.length
             ? `<div class="preview-item-variant">${variantNames.join(', ')}</div>`
             : '';
+          const boxLine = item.selected_packaging_option?.name
+            ? `<div class="preview-item-variant">Box: ${item.selected_packaging_option.name}</div>`
+            : '';
           return `
           <div class="preview-item">
             <span>
               <strong>${item.product_name}</strong> × ${item.quantity}
               ${variantLine}
+              ${boxLine}
             </span>
             <div class="preview-actions">
               <span style="white-space: nowrap">${EnhancedCartSystem.formatCurrency(item.subtotal)}</span>

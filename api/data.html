@@ -1227,6 +1227,53 @@ try {
             ],
         ];
 
+        $rotiMenullPackagingOptions = [
+            ['id' => 501, 'name' => 'Box snack box', 'price' => 1000],
+            ['id' => 502, 'name' => 'Mini set box', 'price' => 37000],
+            ['id' => 503, 'name' => 'Snack box - Paket 1', 'price' => 6000],
+            ['id' => 504, 'name' => 'Snack box - Paket 2', 'price' => 8000],
+            ['id' => 505, 'name' => 'Snack box - paket 9k', 'price' => 9000],
+            ['id' => 506, 'name' => 'Snack box 10k', 'price' => 10000],
+            ['id' => 507, 'name' => 'Snack box 11k', 'price' => 11000],
+            ['id' => 508, 'name' => 'Snack box 12k', 'price' => 12000],
+            ['id' => 509, 'name' => 'Snack box 5k', 'price' => 5000],
+            ['id' => 510, 'name' => 'Snack box 6k', 'price' => 6000],
+            ['id' => 511, 'name' => 'Snack box 8k', 'price' => 8000],
+        ];
+
+        $miniMenullPackagingOptions = array_merge([
+            ['id' => 512, 'name' => 'Box Mini Menull 4', 'price' => 4000],
+            ['id' => 513, 'name' => 'Box Mini Menull 8', 'price' => 5000],
+        ], $rotiMenullPackagingOptions);
+
+        foreach ($products as &$product) {
+            if (($product['brand_id'] ?? null) !== 2) {
+                continue;
+            }
+
+            $product['packaging_options'] = ((int)($product['id'] ?? 0) === 102)
+                ? $miniMenullPackagingOptions
+                : $rotiMenullPackagingOptions;
+            $product['has_packaging_options'] = !empty($product['packaging_options']);
+        }
+        unset($product);
+
+        usort($products, function (array $a, array $b): int {
+            $idA = (int)($a['id'] ?? 0);
+            $idB = (int)($b['id'] ?? 0);
+            if ($idA !== $idB) {
+                return $idA <=> $idB;
+            }
+
+            $brandA = (string)($a['brand_name'] ?? '');
+            $brandB = (string)($b['brand_name'] ?? '');
+            if ($brandA !== $brandB) {
+                return strcmp($brandA, $brandB);
+            }
+
+            return strcmp((string)($a['name'] ?? ''), (string)($b['name'] ?? ''));
+        });
+
         echo json_encode(get_response(true, ['products' => $products]));
         exit;
     }
@@ -1254,6 +1301,7 @@ try {
             ['id' => 2, 'name' => 'Roti Menull'],
             ['id' => 3, 'name' => 'Teras Menull'],
         ];
+        usort($brands, fn(array $a, array $b): int => (int)($a['id'] ?? 0) <=> (int)($b['id'] ?? 0));
         echo json_encode(get_response(true, ['brands' => $brands]));
         exit;
     }
@@ -1280,6 +1328,7 @@ try {
             ['id' => 23, 'name' => 'Minuman', 'brand_id' => 3, 'brand_name' => 'Teras Menull'],
             ['id' => 24, 'name' => 'Kerupuk', 'brand_id' => 3, 'brand_name' => 'Teras Menull'],
         ];
+        usort($categories, fn(array $a, array $b): int => (int)($a['id'] ?? 0) <=> (int)($b['id'] ?? 0));
         echo json_encode(get_response(true, ['categories' => $categories]));
         exit;
     }
@@ -1292,6 +1341,7 @@ try {
             ['id' => 3, 'name' => 'Mozzarella', 'price' => 5000],
             ['id' => 4, 'name' => 'Extra Meat', 'price' => 7000],
         ];
+        usort($extras, fn(array $a, array $b): int => (int)($a['id'] ?? 0) <=> (int)($b['id'] ?? 0));
         echo json_encode(get_response(true, ['extras' => $extras]));
         exit;
     }
@@ -1304,6 +1354,7 @@ try {
             ['id' => 3, 'name' => 'Perkedel', 'price' => 3000],
             ['id' => 4, 'name' => 'Sambal', 'price' => 2000],
         ];
+        usort($items, fn(array $a, array $b): int => (int)($a['id'] ?? 0) <=> (int)($b['id'] ?? 0));
         echo json_encode(get_response(true, ['additional_items' => $items]));
         exit;
     }

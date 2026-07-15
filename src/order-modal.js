@@ -67,6 +67,13 @@ class OrderConfigurationModal {
             <div id="additionalItemsList" style="display:grid;gap:4px;"></div>
           </div>
 
+          <!-- Packaging Options -->
+          <div id="packagingSection" style="display:none;margin-bottom:10px;">
+            <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;color:#9a6b4b;margin-bottom:4px;">Pilih Box</div>
+            <div id="packagingSubtitle" style="font-size:0.7rem;color:#9a6b4b;margin-bottom:6px;font-style:italic;">Silakan pilih box yang ingin digunakan untuk pesanan ini</div>
+            <div id="packagingList" style="display:grid;gap:4px;"></div>
+          </div>
+
           <!-- Quantity -->
           <div style="margin-bottom:8px;">
             <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;color:#9a6b4b;margin-bottom:3px;">Quantity</div>
@@ -90,6 +97,10 @@ class OrderConfigurationModal {
             <div id="additionalRow" style="display:none;justify-content:space-between;font-size:0.8rem;color:#6b4632;padding:2px 0;">
               <span>Additional</span>
               <span id="priceAdditional">Rp 0</span>
+            </div>
+            <div id="packagingRow" style="display:none;justify-content:space-between;font-size:0.8rem;color:#6b4632;padding:2px 0;">
+              <span>Pilihan Box</span>
+              <span id="pricePackaging">Rp 0</span>
             </div>
             <div style="display:flex;justify-content:space-between;border-top:1.5px solid #e3cbb6;margin-top:4px;padding-top:6px;font-weight:700;font-size:0.9rem;color:#3b2418;">
               <span>Subtotal</span>
@@ -150,14 +161,15 @@ class OrderConfigurationModal {
 
   open(product) {
     this.currentProduct = product;
-    this.selectedConfig = {
-      selectedExtras: [],
-      selectedAdditionalItems: [],
-      selectedVariants: [],
-      selectedPackageItems: [],
-      notes: '',
-      quantity: 1,
-    };
+      this.selectedConfig = {
+        selectedExtras: [],
+        selectedAdditionalItems: [],
+        selectedVariants: [],
+        selectedPackageItems: [],
+        selectedPackagingOption: null,
+        notes: '',
+        quantity: 1,
+      };
 
     document.getElementById('modalTitle').textContent = product.name || '';
     document.getElementById('modalBrand').textContent = product.brand_name || '';
@@ -170,6 +182,7 @@ class OrderConfigurationModal {
     this.setupVariants(product);
     this.setupExtras(product);
     this.setupAdditionalItems(product);
+    this.setupPackagingOptions(product);
 
     this.modal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -378,6 +391,53 @@ class OrderConfigurationModal {
     });
   }
 
+  setupPackagingOptions(product) {
+    const section = document.getElementById('packagingSection');
+    const list = document.getElementById('packagingList');
+    const subtitle = document.getElementById('packagingSubtitle');
+    list.innerHTML = '';
+
+    if (!product.packaging_options || product.packaging_options.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = 'block';
+    subtitle.textContent = 'Silakan pilih box yang ingin digunakan untuk pesanan ini';
+    this.selectedConfig.selectedPackagingOption = null;
+
+    product.packaging_options.forEach((option, index) => {
+      const div = document.createElement('div');
+      div.style.cssText = 'display:flex;align-items:center;gap:8px;padding:4px 10px;border:1.5px solid #e3cbb6;border-radius:8px;background:#fff;transition:all 0.2s ease;';
+
+      div.innerHTML = `
+        <input type="radio" name="packaging_option" id="packaging_${index}" value="${option.id}" style="width:16px;height:16px;accent-color:#6b4632;cursor:pointer;flex-shrink:0;" />
+        <label for="packaging_${index}" style="flex:1;display:flex;justify-content:space-between;cursor:pointer;margin:0;font-size:0.82rem;color:#3b2418;">
+          <span>${option.name}</span>
+          <span style="font-weight:600;color:#6b4632;font-size:0.75rem;background:#f0e1d3;padding:0 8px;border-radius:999px;">${this.formatCurrency(option.price)}</span>
+        </label>
+      `;
+      list.appendChild(div);
+
+      div.querySelector('input').addEventListener('change', (e) => {
+        if (e.target.checked) {
+          this.selectedConfig.selectedPackagingOption = {
+            id: option.id,
+            name: option.name,
+            price: option.price
+          };
+          list.querySelectorAll('div').forEach((row) => {
+            row.style.borderColor = '#e3cbb6';
+            row.style.background = '#fff';
+          });
+          div.style.borderColor = '#6b4632';
+          div.style.background = '#fef6ee';
+        }
+        this.updatePrice();
+      });
+    });
+  }
+
   changeQuantity(delta) {
     const newQty = Math.max(1, this.selectedConfig.quantity + delta);
     this.selectedConfig.quantity = newQty;
@@ -404,6 +464,7 @@ class OrderConfigurationModal {
     
     let extrasPrice = this.selectedConfig.selectedExtras ? this.selectedConfig.selectedExtras.reduce((s, e) => s + e.price, 0) : 0;
     let additionalPrice = this.selectedConfig.selectedAdditionalItems ? this.selectedConfig.selectedAdditionalItems.reduce((s, i) => s + i.price, 0) : 0;
+    let packagingPrice = this.selectedConfig.selectedPackagingOption ? (this.selectedConfig.selectedPackagingOption.price || 0) : 0;
 
     document.getElementById('extrasRow').style.display = extrasPrice > 0 ? 'flex' : 'none';
     document.getElementById('priceExtras').textContent = this.formatCurrency(extrasPrice);
@@ -411,7 +472,10 @@ class OrderConfigurationModal {
     document.getElementById('additionalRow').style.display = additionalPrice > 0 ? 'flex' : 'none';
     document.getElementById('priceAdditional').textContent = this.formatCurrency(additionalPrice);
 
-    const subtotal = (basePrice + extrasPrice + additionalPrice) * qty;
+    document.getElementById('packagingRow').style.display = packagingPrice > 0 ? 'flex' : 'none';
+    document.getElementById('pricePackaging').textContent = this.formatCurrency(packagingPrice);
+
+    const subtotal = (basePrice + extrasPrice + additionalPrice + packagingPrice) * qty;
     document.getElementById('priceSubtotal').textContent = this.formatCurrency(subtotal);
   }
 
@@ -439,6 +503,10 @@ class OrderConfigurationModal {
     if (this.currentProduct.is_package) {
       productToSend.selectedPackageItems = this.selectedConfig.selectedPackageItems;
       productToSend.price = this.selectedConfig.selectedPackageItems.reduce((sum, item) => sum + item.price, 0);
+    }
+
+    if (this.selectedConfig.selectedPackagingOption) {
+      productToSend.selectedPackagingOption = this.selectedConfig.selectedPackagingOption;
     }
     
     const event = new CustomEvent('addOrderToCart', {
