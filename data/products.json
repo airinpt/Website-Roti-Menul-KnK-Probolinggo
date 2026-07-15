@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "name": "Burger",
+    "price": 0,
+    "brand_id": 1,
+    "brand_name": "MieeNull",
+    "category_id": 2,
+    "category_name": "Burger",
+    "image": "foto_produk_mieenull/burger.jpeg",
+    "enable_serving": false,
+    "packaging_fee": 0,
+    "description": "Burger, Saos, Selada, Timun, Crispy Chicken/Beef, Kentang",
+    "has_variants": false,
+    "has_extras": true,
+    "is_package": true,
+    "variants": [],
+    "extras": [
+      { "id": 101, "name": "Telur", "price": 3000 },
+      { "id": 102, "name": "Keju", "price": 5000 },
+      { "id": 103, "name": "Moza", "price": 5000 },
+      { "id": 104, "name": "Crispy Chicken", "price": 7000 },
+      { "id": 105, "name": "Crispy Chiken Spicy", "price": 9000 }
+    ],
+    "additional_items": [],
+    "package_items": [
+      { "id": 1, "name": "Chiken", "price": 15000, "category": "Pilih Varian Burger" },
+      { "id": 2, "name": "Chiken Spicy", "price": 17000, "category": "Pilih Varian Burger" },
+      { "id": 3, "name": "Beef", "price": 17000, "category": "Pilih Varian Burger" },
+      { "id": 4, "name": "Beef Spicy", "price": 19000, "category": "Pilih Varian Burger" }
+    ],
+    "packaging_options": []
+  },
+  {
+    "id": 2,
+    "name": "Mie Ayam",
+    "price": 0,
+    "brand_id": 1,
+    "brand_name": "MieeNull",
+    "category_id": 1,
+    "category_name": "Mie Ayam",
+    "image": "foto_produk_mieenull/mie_ayam.jpeg",
+    "enable_serving": false,
+    "packaging_fee": 0,
+    "description": "Mie, Sawi, Pangsit, Pangsit Isi, Timun",
+    "has_variants": false,
+    "has_extras": true,
+    "is_package": true,
+    "variants": [],
+    "extras": [],
+    "additional_items": [],
+    "package_items": [
+      { "id": 4, "name": "Ori", "price": 10000, "category": "Pilih Varian Mie Ayam" },
+      { "id": 5, "name": "Pedas", "price": 12000, "category": "Pilih Varian Mie Ayam" },
+      { "id": 6, "name": "Extra Pedas", "price": 13000, "category": "Pilih Varian Mie Ayam" }
+    ],
+    "packaging_options": []
+  },
+  {
+    "id": 100,
+    "name": "Roti Menull",
+    "price": 0,
+    "brand_id": 2,
+    "brand_name": "Roti Menull",
+    "category_id": 1,
+    "category_name": "Roti Menull",
+    "image": "foto_produk_roti/rotimenull.jpeg",
+    "enable_serving": false,
+    "packaging_fee": 0,
+    "description": "Roti lembut signature",
+    "has_variants": false,
+    "has_extras": true,
+    "is_package": true,
+    "variants": [],
+    "extras": [
+      { "id": 201, "name": "Keju", "price": 3000 },
+      { "id": 202, "name": "Kacang", "price": 3000 },
+      { "id": 203, "name": "Moza", "price": 3000 }
+    ],
+    "additional_items": [],
+    "package_items": [
+      { "name": "Roti Menull Coklat", "price": 17000, "category": "Varian Rasa Manis" },
+      { "name": "Roti Menull Keju", "price": 17000, "category": "Varian Rasa Manis" },
+      { "name": "Roti Menull Tiramisu", "price": 17000, "category": "Varian Rasa Manis" }
+    ],
+    "packaging_options": []
+  },
+  {
+    "id": 200,
+    "name": "Nasi Padang",
+    "price": 0,
+    "brand_id": 3,
+    "brand_name": "Teras Menull",
+    "category_id": 1,
+    "category_name": "Teras Menull",
+    "image": "foto_produk_teras/nasi_padang.jpeg",
+    "enable_serving": false,
+    "packaging_fee": 0,
+    "description": "Nasi padang lengkap",
+    "has_variants": false,
+    "has_extras": false,
+    "is_package": true,
+    "variants": [],
+    "extras": [],
+    "additional_items": [],
+    "package_items": [
+      { "id": 301, "name": "Nasi Putih", "price": 4000, "category": "Pilih Nasi" },
+      { "id": 302, "name": "Nasi Daun Jeruk", "price": 5000, "category": "Pilih Nasi" },
+      { "id": 303, "name": "Ayam Serundeng", "price": 8000, "category": "Lauk Utama" }
+    ],
+    "packaging_options": []
+  }
+]

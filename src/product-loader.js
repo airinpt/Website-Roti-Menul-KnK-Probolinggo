@@ -5,26 +5,39 @@ class ProductLoader {
   constructor(options = {}) {
     this.gridId = options.gridId || 'categoryProductGrid';
     this.products = [];
-    this.apiUrl = options.apiUrl || '../api/data.html';
+    this.apiUrl = options.apiUrl || this.resolveApiUrl();
+  }
+
+  resolveApiUrl() {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    const isNestedBrandPage = path.includes('/mie-minull/') || path.includes('/roti-menull/') || path.includes('/teras-menull/');
+    return isNestedBrandPage ? '../data/products.json' : './data/products.json';
   }
 
   async loadProducts() {
+    const fallbackProducts = this.getSampleProducts();
+
     try {
-      const response = await fetch(`${this.apiUrl}?action=products`);
-      const data = await response.json();
-      
-      if (data.success && data.data.products && data.data.products.length > 0) {
-        this.products = this.sortProducts(data.data.products);
+      const response = await fetch(this.apiUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const payload = await response.json();
+      const products = Array.isArray(payload)
+        ? payload
+        : payload?.data?.products || payload?.products || [];
+
+      if (products.length > 0) {
+        this.products = this.sortProducts(products);
         return this.products;
       }
-      
-      this.products = [];
-      return this.products;
     } catch (error) {
-      console.error('Error loading products:', error);
-      this.products = [];
-      return this.products;
+      console.warn('Static product fallback activated:', error);
     }
+
+    this.products = this.sortProducts(fallbackProducts);
+    return this.products;
   }
 
   sortProducts(products) {
