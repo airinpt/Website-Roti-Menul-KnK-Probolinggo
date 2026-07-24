@@ -17,7 +17,7 @@ const ORDER_SUMMARY_ROUTES = {
   sessionEndpoint: ORDER_SUMMARY_CONTEXT.sessionEndpoint || '',
 };
 
-const ORDER_SUMMARY_WA_NUMBER = ORDER_SUMMARY_CONTEXT.waNumber || '6281292401513';
+const ORDER_SUMMARY_WA_NUMBER = ORDER_SUMMARY_CONTEXT.waNumber || '6285385852799';
 
 function osEsc(value) {
   return String(value).replace(/[&<>"']/g, (m) => ({

@@ -395,7 +395,7 @@ session_start();
       checkoutUrl: '../checkout.html',
       customerInfoUrl: '../customer-info.html',
       sessionEndpoint: '../src/cart-session.html',
-      waNumber: '6281292401513'
+      waNumber: '6285385852799'
     };
   </script>
 

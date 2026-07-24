@@ -108,7 +108,7 @@ const MENU = [
   }
 ];
 
-const WA_NUMBER = "6281292401513";
+const WA_NUMBER = "6285385852799";
 const pesanan = {};
 
 let modalKi = null;

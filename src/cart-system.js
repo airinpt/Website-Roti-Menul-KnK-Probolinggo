@@ -8,7 +8,7 @@ const PAGE_ROUTES = {
   sessionEndpoint: PAGE_CONTEXT.sessionEndpoint || ''
 };
 
-const WA_NUMBER = PAGE_CONTEXT.waNumber || '6281292401513';
+const WA_NUMBER = PAGE_CONTEXT.waNumber || '6285385852799';
 
 const CATEGORY_MENUS = {
   'roti-menull': {
